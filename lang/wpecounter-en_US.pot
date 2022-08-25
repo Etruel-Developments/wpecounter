@@ -1,0 +1,119 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WPeCounter v1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-01-31 13:06-0300\n"
+"PO-Revision-Date: 2014-01-31 13:07-0300\n"
+"Last-Translator: Esteban Truelsegaard <esteban@netmdp.com>\n"
+"Language-Team: \n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Poedit 1.6.3\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;"
+"_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2\n"
+"X-Poedit-Basepath: ../\n"
+"X-Textdomain-Support: yes\n"
+"X-Poedit-SearchPath-0: .\n"
+
+# @ wpecounter
+#: myplugins.php:3
+msgid "Donate"
+msgstr ""
+
+# @ wpecounter
+#: myplugins.php:6
+msgid "Thanks for test, use and enjoy this plugin."
+msgstr ""
+
+# @ wpecounter
+#: myplugins.php:7
+msgid "If you like it, I really appreciate a donation."
+msgstr ""
+
+# @ wpecounter
+#: myplugins.php:9
+msgid "Click for Donate"
+msgstr ""
+
+# @ wpecounter
+#: myplugins.php:17
+msgid "Knows my plugins"
+msgstr ""
+
+# @ wpecounter
+#: wpecounter.php:97
+msgid "Views"
+msgstr ""
+
+# @ wpecounter
+#: wpecounter.php:169 wpecounter.php:170
+msgid "WPeCounter"
+msgstr ""
+
+#: wpecounter.php:212
+msgid "Posts updated."
+msgstr ""
+
+# @ wpecounter
+#: wpecounter.php:222
+msgid "Settings saved"
+msgstr ""
+
+# @ wpecounter
+#: wpecounter.php:229
+msgid "WPeCounter settings"
+msgstr ""
+
+# @ wpecounter
+#: wpecounter.php:239
+msgid "WPeCounter options"
+msgstr ""
+
+# @ wpecounter
+#: wpecounter.php:243
+msgid "Select Custom post types that must be count views."
+msgstr ""
+
+# @ default
+#: wpecounter.php:266
+msgid "Save"
+msgstr ""
+
+#: wpecounter.php:274
+msgid "Import other counters to WPeCounter Views"
+msgstr ""
+
+#: wpecounter.php:276
+msgid "Be careful with This option. There are not undo."
+msgstr ""
+
+#: wpecounter.php:277
+msgid ""
+"With this option you can import the numbers of visits that another script "
+"has stored in a custom-meta-field different that of WPeCounter."
+msgstr ""
+
+#: wpecounter.php:278
+msgid ""
+"This function basically copy (if any) the previous meta-field of each post "
+"to meta-field \"Views\" used by WPeCounter. Replacing the current value of "
+"\"Views\" if it already exists."
+msgstr ""
+
+#: wpecounter.php:281
+msgid "Show import area."
+msgstr ""
+
+#: wpecounter.php:285
+msgid ""
+"Type name of custom meta field from another counter to import to WPeCounter "
+"Views meta field."
+msgstr ""
+
+#: wpecounter.php:294
+msgid "Save & Import"
+msgstr ""

@@ -1,0 +1,80 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WPeCounter v1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-08-11 17:22-0300\n"
+"PO-Revision-Date: 2014-01-27 15:41+0100\n"
+"Last-Translator: Borisa Djuraskovic <borisad@webhostinghub.com>\n"
+"Language-Team: NetMdP <esteban@netmdp.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Poedit 1.5.7\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;"
+"_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2\n"
+"X-Poedit-Basepath: .\n"
+"X-Textdomain-Support: yes\n"
+"Language: es_AR\n"
+"X-Poedit-SearchPath-0: .\n"
+
+# @ wpecounter
+#: wpecounter.php:162
+msgid "Settings saved"
+msgstr "Podešavanja sačuvana"
+
+# @ wpecounter
+#: wpecounter.php:175
+msgid "Donate"
+msgstr "Donirati"
+
+# @ wpecounter
+#: wpecounter.php:178
+msgid "Thanks for test, use and enjoy this plugin."
+msgstr "Hvala na testu , koristi i uživaj u ovom plugin-u ."
+
+# @ wpecounter
+#: wpecounter.php:179
+msgid "If you like it, I really appreciate a donation."
+msgstr "Ako vam se sviđa , stvarno cenim donaciju ."
+
+# @ wpecounter
+#: wpecounter.php:181
+msgid "Click for Donate"
+msgstr "Kliknite za Donaciju"
+
+# @ default
+#: wpecounter.php:239
+msgid "Save"
+msgstr "Sacuvaj"
+
+# @ wpecounter
+#: wpecounter.php:189
+msgid "Knows my plugins"
+msgstr "Znas moje plagin-ove"
+
+# @ wpecounter
+#: wpecounter.php:94
+msgid "Views"
+msgstr "Pregleda"
+
+# @ wpecounter
+#: wpecounter.php:131 wpecounter.php:132
+msgid "WPeCounter"
+msgstr "WPeCounter"
+
+# @ wpecounter
+#: wpecounter.php:169
+msgid "WPeCounter settings"
+msgstr "WPeCounter podesavanje"
+
+# @ wpecounter
+#: wpecounter.php:212
+msgid "WPeCounter options"
+msgstr "WPeCounter opcije"
+
+# @ wpecounter
+#: wpecounter.php:216
+msgid "Select Custom post types that must be count views."
+msgstr "Izaberite Custom post types  u koji  moraju biti uračunati pregledi ."
