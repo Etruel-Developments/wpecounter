@@ -1,13 +1,13 @@
-=== WPeCounter ===
-Contributors: etruel
+=== WP Views Counter ===
+Contributors: etruel, khaztiel
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7267TH4PT3GSW
 Tags: views, visit counter, visits counter, post views, visits, counter, post visits, ajax counter, page count, count visits, popular posts.
 Requires at least: 2.9
-Tested up to: 4.5
-Stable tag: 1.2
+Tested up to: 6.0.2
+Stable tag: trunk
 License: GPLv3
 
-Visits Post(types) counter. Shown in a sortable column the number of visits on lists of posts, pages and/or custom post types and shortcode.
+Visits Post(types) counter. Shown the number of visits on lists of posts, pages and/or custom post types and shortcode.
 
 == Description ==
 
@@ -18,20 +18,21 @@ Works with Easy Digital Downloads Products to see how many views has every Downl
 
 Is extremely lightweight because it works with ajax.  
 
-= Comming Soon =
+Developer and bugtracker on github repository: https://github.com/Etruel-Developments/wpecounter/issues
+
+Feel free to fork it and propose new enhancements or Pull Requests.
+
+= Features Comming Soon =
 1. Don't count logged in users, or per role selected in settings.
 1. Select the column order to display the Views column in every post type list.
 
-
-This plugin uses "Entry views" script created by Justin Tadlock with GPLv2.
-
-You can read, follow, donate and comment about this plugin at author page: [netmdp.com](http://www.netmdp.com)
+We uses "Entry views" script created by Justin Tadlock with GPLv2. 
 
 == Installation ==
 
 You can either install it automatically from the WordPress admin, or do it manually:
 
-1. Unzip "WPeCounter" archive and put the folder into your plugins folder (/wp-content/plugins/).
+1. Unzip "WP Views Counter" archive and put the folder into your plugins folder (/wp-content/plugins/).
 1. Activate the plugin through the 'Plugins' menu in WordPress
 1. You'll see a new column with Views on WordPress pages/posts/types list screen.
 1. For print use shortcode [WPeCounter] in widgets, post or pages.
@@ -42,6 +43,10 @@ You can either install it automatically from the WordPress admin, or do it manua
 1. Showing on posts list.
 
 == Changelog ==
+
+= 2.0 =
+1. New name! WP Views Counter. Make ir more realistic with it uses.
+1. We made a brand new and coded from scratch.
 
 = 1.2 =
 1. Added Compatibility with Easy Digital Downloads. 
