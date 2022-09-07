@@ -5,7 +5,7 @@ Tags: views, visit counter, visits counter, post views, visits, counter, post vi
 Requires at least: 2.9
 Tested up to: 6.0.2
 Stable tag: trunk
-License: GPLv3
+License: GPLv2
 
 Visits Post(types) counter. Shown the number of visits on lists of posts, pages and/or custom post types and shortcode.
 
@@ -22,11 +22,22 @@ Developer and bugtracker on github repository: https://github.com/Etruel-Develop
 
 Feel free to fork it and propose new enhancements or Pull Requests.
 
+= Features =
+
+* Widget with list of most popular posts (types).
+* Configurable visit counter by Custom Post Types.
+* Allow to "Order By Visits" on all selected Post (types) lists.
+* Compatibility with Easy Digital Downloads.
+* Allow to import meta-fields from other counters.
+* Multilanguage Ready.
+
 = Features Comming Soon =
-1. Don't count logged in users, or per role selected in settings.
+1. Options to doesn't count logged in users, or per role selected in settings.
 1. Select the column order to display the Views column in every post type list.
 
-We uses "Entry views" script created by Justin Tadlock with GPLv2. 
+At initial versions we used "Entry views" script created by Justin Tadlock with GPLv2. 
+There is little unmodified code left from those early days, but we are very grateful to him for his work.
+Hope you can also enjoy this plugin.
 
 == Installation ==
 
@@ -46,7 +57,11 @@ You can either install it automatically from the WordPress admin, or do it manua
 
 = 2.0 =
 1. New name! WP Views Counter. Make ir more realistic with it uses.
-1. We made a brand new and coded from scratch.
+1. We made a brand new and coded from scratch. More solid. more robust, more lightweight.
+1. Added Legacy Widget! With list of most visited posts (types).
+1. Fixes the preview count when it only had to count visits at frontend.
+1. Language POT and es_ES files updated.
+1. Tested on Wordpress 6.0.2
 
 = 1.2 =
 1. Added Compatibility with Easy Digital Downloads. 
@@ -74,4 +89,4 @@ You can either install it automatically from the WordPress admin, or do it manua
 First Release
 
 == Upgrade Notice ==
-1. Easy Digital Downloads Compatible.  Recommended Upgrade. 
+1. Major Upgrade. 
