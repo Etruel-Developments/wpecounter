@@ -52,6 +52,7 @@ You can either install it automatically from the WordPress admin, or do it manua
 
 1. Admin settings page.
 1. Showing on posts list.
+1. Legacy Widget to Display Popular Posts (types).
 
 == Changelog ==
 

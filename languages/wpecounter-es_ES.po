@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPeCounter v1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-01-31 13:06-0300\n"
-"PO-Revision-Date: 2014-01-31 13:15-0300\n"
+"POT-Creation-Date: 2022-09-07 18:22-0300\n"
+"PO-Revision-Date: 2022-09-07 18:27-0300\n"
 "Last-Translator: Esteban Truelsegaard <esteban@netmdp.com>\n"
 "Language-Team: NetMdP <esteban@netmdp.com>\n"
 "Language: es_AR\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Poedit 1.6.3\n"
+"X-Generator: Poedit 3.0.1\n"
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;"
 "_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2\n"
@@ -20,80 +20,59 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 
 # @ wpecounter
-#: myplugins.php:3
-msgid "Donate"
-msgstr "Donar"
-
-# @ wpecounter
-#: myplugins.php:6
-msgid "Thanks for test, use and enjoy this plugin."
-msgstr "Gracias por probar, usar y disfrutar este plugin."
-
-# @ wpecounter
-#: myplugins.php:7
-msgid "If you like it, I really appreciate a donation."
-msgstr "Si te gusta, realmente apreciaría una donación."
-
-# @ wpecounter
-#: myplugins.php:9
-msgid "Click for Donate"
-msgstr "Click para Donar"
-
-# @ wpecounter
-#: myplugins.php:17
-msgid "Knows my plugins"
-msgstr "Conoce mis plugins"
-
-# @ wpecounter
-#: wpecounter.php:97
+#: includes/class-views.php:270
 msgid "Views"
 msgstr "Visitas"
 
 # @ wpecounter
-#: wpecounter.php:169 wpecounter.php:170
-msgid "WPeCounter"
-msgstr "WPeCounter"
-
-#: wpecounter.php:212
-msgid "Posts updated."
-msgstr "Posts actualizados."
+#: includes/plugin-utils.php:52
+msgid "Go to WP Views Counter Settings Page"
+msgstr "Ir a la Página de Configuraciones"
 
 # @ wpecounter
-#: wpecounter.php:222
-msgid "Settings saved"
-msgstr "Opciones guardadas"
-
-# @ wpecounter
-#: wpecounter.php:229
-msgid "WPeCounter settings"
-msgstr "WPeCounter"
-
-# @ wpecounter
-#: wpecounter.php:239
-msgid "WPeCounter options"
+#: includes/plugin-utils.php:52
+msgid "Settings"
 msgstr "Opciones"
 
+#: includes/plugin-utils.php:71
+msgid "Technical Support"
+msgstr "Soporte Técnico"
+
+#: includes/plugin-utils.php:72
+msgid "Premium Support"
+msgstr "Soporte Premium"
+
+#: includes/plugin-utils.php:73
+msgid "Rate Plugin"
+msgstr "Califica Plugin"
+
 # @ wpecounter
-#: wpecounter.php:243
-msgid "Select Custom post types that must be count views."
-msgstr ""
-"Seleccione los tipos de posts (Custom post types) que deben contar las "
-"visitas."
+#: includes/plugin-utils.php:74
+msgid "Donate"
+msgstr "Donar"
 
-# @ default
-#: wpecounter.php:266
-msgid "Save"
-msgstr "Guardar"
+#: includes/scripts.php:38
+msgid "Loading..."
+msgstr "Cargando…"
 
-#: wpecounter.php:274
+# @ wpecounter
+#: includes/settings.php:54 includes/settings.php:55
+msgid "WP Views Counter"
+msgstr "WP Views Counter"
+
+#: includes/settings.php:105
+msgid "Counter on Post types:"
+msgstr "Activar Contador en:"
+
+#: includes/settings.php:178
 msgid "Import other counters to WPeCounter Views"
 msgstr "Importar desde otros contadores a WPeCounter"
 
-#: wpecounter.php:276
+#: includes/settings.php:179
 msgid "Be careful with This option. There are not undo."
-msgstr "Ten cuidado con esta opción! No se puede deshacer!"
+msgstr "Ten cuidado con esta opción! No se puede deshacer."
 
-#: wpecounter.php:277
+#: includes/settings.php:180
 msgid ""
 "With this option you can import the numbers of visits that another script "
 "has stored in a custom-meta-field different that of WPeCounter."
@@ -101,21 +80,21 @@ msgstr ""
 "Con esta opción puede importar el número de visitas que otro script ha "
 "guardado en un meta-campo diferente al que usa WPeCounter."
 
-#: wpecounter.php:278
+#: includes/settings.php:181
 msgid ""
 "This function basically copy (if any) the previous meta-field of each post "
-"to meta-field \"Views\" used by WPeCounter. Replacing the current value of "
-"\"Views\" if it already exists."
+"to meta-field \"Views\" used by this WP Views Counter (aka WPeCounter). "
+"Replacing the current value of \"Views\" if it already exists."
 msgstr ""
 "Esta función básicamente copia (si existe) el meta-campo anterior de cada "
-"post al meta-campo \"Views\" usado por WPeCounter.  Reemplazando el valor "
-"actual de \"Views\" si ya existe."
+"post al meta-campo \"Views\" usado por WP Views Counter.  Reemplazando el "
+"valor actual de \"Views\" si ya existe."
 
-#: wpecounter.php:281
+#: includes/settings.php:184
 msgid "Show import area."
 msgstr "Mostrar area para importar."
 
-#: wpecounter.php:285
+#: includes/settings.php:188
 msgid ""
 "Type name of custom meta field from another counter to import to WPeCounter "
 "Views meta field."
@@ -123,6 +102,72 @@ msgstr ""
 "Tipee el nombre del meta-campo del otro contador para importarlo al meta-"
 "campo \"Views\" de WPeCounter."
 
-#: wpecounter.php:294
-msgid "Save & Import"
-msgstr "Guardar e Importar"
+#: includes/settings.php:195
+msgid "Proceed to Import"
+msgstr "Proceder a Importar"
+
+#: includes/settings.php:340
+msgid "Import success. Posts updated: "
+msgstr "Éxito al importar. Entradas Actualizadas: "
+
+#: includes/settings.php:342
+msgid "There was no updates."
+msgstr "No hay actualizaciones."
+
+# @ wpecounter
+#: includes/widget.php:43
+msgid "Views Counter"
+msgstr "Views Counter"
+
+#: includes/widget.php:189
+msgid "Title:"
+msgstr "Título:"
+
+#: includes/widget.php:193
+msgid "Post Type:"
+msgstr "Post Type:"
+
+#: includes/widget.php:201
+msgid "Limit:"
+msgstr "Límite:"
+
+#: includes/widget.php:205
+msgid "Order:"
+msgstr "Orden:"
+
+#: includes/widget.php:214
+msgid "Show views count?"
+msgstr "Mostrar Conteo?"
+
+# @ wpecounter
+#~ msgid "Thanks for test, use and enjoy this plugin."
+#~ msgstr "Gracias por probar, usar y disfrutar este plugin."
+
+# @ wpecounter
+#~ msgid "If you like it, I really appreciate a donation."
+#~ msgstr "Si te gusta, realmente apreciaría una donación."
+
+# @ wpecounter
+#~ msgid "Click for Donate"
+#~ msgstr "Click para Donar"
+
+# @ wpecounter
+#~ msgid "Knows my plugins"
+#~ msgstr "Conoce mis plugins"
+
+#~ msgid "Posts updated."
+#~ msgstr "Posts actualizados."
+
+# @ wpecounter
+#~ msgid "WPeCounter options"
+#~ msgstr "Opciones"
+
+# @ wpecounter
+#~ msgid "Select Custom post types that must be count views."
+#~ msgstr ""
+#~ "Seleccione los tipos de posts (Custom post types) que deben contar las "
+#~ "visitas."
+
+# @ default
+#~ msgid "Save"
+#~ msgstr "Guardar"

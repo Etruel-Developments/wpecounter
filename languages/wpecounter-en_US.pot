@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPeCounter v1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-06 18:32-0300\n"
+"POT-Creation-Date: 2022-09-07 18:22-0300\n"
 "PO-Revision-Date: 2014-01-31 13:07-0300\n"
 "Last-Translator: Esteban Truelsegaard <esteban@netmdp.com>\n"
 "Language-Team: \n"
@@ -23,13 +23,6 @@ msgstr ""
 #: includes/class-views.php:270
 msgid "Views"
 msgstr ""
-
-#: includes/functions.php:45
-#, php-format
-msgid "%s View"
-msgid_plural "%s Views"
-msgstr[0] ""
-msgstr[1] ""
 
 #: includes/plugin-utils.php:52
 msgid "Go to WP Views Counter Settings Page"
@@ -59,27 +52,23 @@ msgstr ""
 msgid "Loading..."
 msgstr ""
 
-#: includes/settings.php:54
+#: includes/settings.php:54 includes/settings.php:55
 msgid "WP Views Counter"
-msgstr ""
-
-#: includes/settings.php:55
-msgid "WPeCounter"
 msgstr ""
 
 #: includes/settings.php:105
 msgid "Counter on Post types:"
 msgstr ""
 
-#: includes/settings.php:178 wpecounter.php:244
+#: includes/settings.php:178
 msgid "Import other counters to WPeCounter Views"
 msgstr ""
 
-#: includes/settings.php:179 wpecounter.php:246
+#: includes/settings.php:179
 msgid "Be careful with This option. There are not undo."
 msgstr ""
 
-#: includes/settings.php:180 wpecounter.php:247
+#: includes/settings.php:180
 msgid ""
 "With this option you can import the numbers of visits that another script "
 "has stored in a custom-meta-field different that of WPeCounter."
@@ -92,11 +81,11 @@ msgid ""
 "Replacing the current value of \"Views\" if it already exists."
 msgstr ""
 
-#: includes/settings.php:184 wpecounter.php:251
+#: includes/settings.php:184
 msgid "Show import area."
 msgstr ""
 
-#: includes/settings.php:188 wpecounter.php:255
+#: includes/settings.php:188
 msgid ""
 "Type name of custom meta field from another counter to import to WPeCounter "
 "Views meta field."
@@ -114,61 +103,26 @@ msgstr ""
 msgid "There was no updates."
 msgstr ""
 
-#: includes/widget.php:52
+#: includes/widget.php:43
 msgid "Views Counter"
 msgstr ""
 
-#: includes/widget.php:188
+#: includes/widget.php:189
 msgid "Title:"
 msgstr ""
 
-#: includes/widget.php:192
+#: includes/widget.php:193
 msgid "Post Type:"
 msgstr ""
 
-#: includes/widget.php:200
+#: includes/widget.php:201
 msgid "Limit:"
 msgstr ""
 
-#: includes/widget.php:204
+#: includes/widget.php:205
 msgid "Order:"
 msgstr ""
 
-#: includes/widget.php:213
+#: includes/widget.php:214
 msgid "Show views count?"
-msgstr ""
-
-#: wpecounter.php:180
-msgid "Posts updated."
-msgstr ""
-
-#: wpecounter.php:190
-msgid "Settings saved"
-msgstr ""
-
-#: wpecounter.php:197
-msgid "WPeCounter settings"
-msgstr ""
-
-#: wpecounter.php:207
-msgid "WPeCounter options"
-msgstr ""
-
-#: wpecounter.php:211
-msgid "Select Custom post types that must be count views."
-msgstr ""
-
-#: wpecounter.php:236
-msgid "Save"
-msgstr ""
-
-#: wpecounter.php:248
-msgid ""
-"This function basically copy (if any) the previous meta-field of each post "
-"to meta-field \"Views\" used by WPeCounter. Replacing the current value of "
-"\"Views\" if it already exists."
-msgstr ""
-
-#: wpecounter.php:264
-msgid "Save & Import"
 msgstr ""
