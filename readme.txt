@@ -4,6 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: views, visit counter, visits counter, post views, visits, counter, post visits, ajax counter, page count, count visits, popular posts.
 Requires at least: 3.1
 Tested up to: 6.0.2
+Requires PHP: 5.2
 Stable tag: trunk
 License: GPLv2
 
@@ -38,6 +39,12 @@ Feel free to fork it and propose new enhancements or Pull Requests.
 At initial versions we used "Entry views" script created by Justin Tadlock with GPLv2. 
 There is little unmodified code left from those early days, but we are very grateful to him for his work.
 Hope you can also enjoy this plugin.
+
+== Frequently Asked Questions ==
+
+= Can I upgrade to version 2.0 without losing the counters from previous versions? =
+
+Yes, the 2.0 major version will import the previous settings and counters. You can also import other custom fields. However, make a backup copy!
 
 == Installation ==
 
