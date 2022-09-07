@@ -8,7 +8,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 
 Tags: views, visit counter, visits counter, post views, visits, counter, post visits, ajax counter, page count, count visits, popular posts.
 
-Requires at least: 2.9
+Requires at least: 3.1
 
 Tested up to: 6.0.2
 
