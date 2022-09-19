@@ -253,20 +253,25 @@ if (!class_exists('WPeCounterViews')) {
 				if (@$cpostypes[$post_type]) {
 					//	add_filter('manage_'.$post_type.'_posts_columns', array( $this, 'posts_columns_id'), 5);
 					add_filter('manage_edit-' . $post_type . '_columns', array($this, 'posts_columns_id'), 10);
-					add_action('manage_' . $post_type . '_posts_custom_column', array($this, 'posts_custom_id_columns'), 5, 2);
+					add_action('manage_' . $post_type . '_posts_custom_column', array($this, 'posts_custom_id_columns'), 10, 2);
 					//Order
 					add_filter('manage_edit-' . $post_type . '_sortable_columns', array($this, 'views_column_register_sortable'));
 				}
 			}
-			add_action('parse_query', array($this, 'views_column_orderby'));
+			add_action('pre_get_posts', array($this, 'views_column_orderby'));
+//			add_action('parse_query', array($this, 'views_column_orderby'));
 			add_action('admin_head', array($this, 'post_views_column_width'));
+//			
+//			
+//			add_filter('manage_edit-' . $post_type . '_columns', array(__CLASS__, 'set_edit_wpematico_columns'));
+//			add_action('manage_' . $post_type . '_posts_custom_column', array(__CLASS__, 'custom_wpematico_column'), 10, 2);
+//			add_filter("manage_edit-' . $post_type . '_sortable_columns", array(__CLASS__, "sortable_columns"));
+//			add_action('pre_get_posts', array(__CLASS__, 'column_orderby'));
+//			
 		}
 
 		public function posts_columns_id($columns) {
-			//$columns['post_views'] = ''.__('Views', 'wpecounter' ) . '';
-			/* $column_post_views = array( 'post_views' => '<div style="text-align: right;width: 60px;">'.__('Views', 'wpecounter' ) . '</div>' );
-			  $columns = $columns + $column_post_views ;
-			 */
+
 			$column_post_views	 = array('post_views' => '' . __('Views', 'wpecounter') . '');
 			// 5to lugar
 			//$columns = array_slice( $columns, 0, 5, true ) + $column_post_views + array_slice( $columns, 5, NULL, true );
@@ -276,7 +281,7 @@ if (!class_exists('WPeCounterViews')) {
 
 		public function posts_custom_id_columns($column_name, $id) {
 			if ($column_name === 'post_views') {
-					echo '' . wpecounter_post_views(array('post_id' => $id) ) . '';
+				echo '' . wpecounter_post_views(array('post_id' => $id)) . '';
 			}
 		}
 
@@ -287,16 +292,50 @@ if (!class_exists('WPeCounterViews')) {
 			return wp_parse_args($custom, $columns);
 		}
 
-		public function views_column_orderby() {
+		public function views_column_orderby($query) {
 			global $pagenow, $post_type;
-			if ('edit.php' != $pagenow || !isset($_GET['orderby']))
-				return;
-			if ('post_views' == $_GET['orderby']) {
-				set_query_var('meta_query', array('sort_column' => 'post_views') );
-//				set_query_var('meta_key', $this->wpecounter_views_meta_key());
-				set_query_var('orderby', 'meta_value_num');
+			$orderby = $query->get('orderby');
+//			if ('edit.php' != $pagenow || empty($orderby) )
+//				return;
+			switch ($orderby) {
+				case 'post_views':
+
+					$query->set('meta_query', array(
+						'sort_column'	 => 'post_views',
+						'relation'		 => 'OR',
+						'views_clause'	 => array(
+							'key'	 => $this->wpecounter_views_meta_key(),
+							'type'	 => 'numeric'
+						),
+						'noviews_clause' => array(
+							'key'		 => $this->wpecounter_views_meta_key(),
+							'compare'	 => 'NOT EXISTS'
+						)
+					));
+
+//					$query->set('meta_key', $this->wpecounter_views_meta_key() );
+//					$query->set('meta_type', 'NUMERIC');
+//					$query->set('suppress_filters', false);
+//					$query->set('hide_empty', false);
+					$query->set('orderby', 'meta_value_num');
+
+					break;
+
+				default:
+					break;
 			}
 		}
+
+//		public function views_column_orderby() {
+//			global $pagenow, $post_type;
+//			if ('edit.php' != $pagenow || !isset($_GET['orderby']))
+//				return;
+//			if ('post_views' == $_GET['orderby']) {
+//				set_query_var('meta_query', array('sort_column' => 'post_views') );
+//				set_query_var('meta_key', $this->wpecounter_views_meta_key());
+//				set_query_var('orderby', 'meta_value_num');
+//			}
+//		}
 
 		public function post_views_column_width() {
 			echo '<style type="text/css">';
