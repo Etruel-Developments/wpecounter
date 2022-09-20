@@ -175,24 +175,35 @@ if (!class_exists('WPeCounterSettings')) {
 						<div id="normal-sortables" class="meta-box-sortables ui-sortable">
 							<div class="postbox inside">
 								<div class="inside">
-									<h3><?php _e('Import other counters to WPeCounter Views', 'wpecounter'); ?></h3>
-									<p><strong><?php _e('Be careful with This option. There are not undo.', 'wpecounter'); ?></strong><br />
-										<small><?php _e('With this option you can import the numbers of visits that another script has stored in a custom-meta-field different that of WPeCounter.', 'wpecounter'); ?><br />
-											<?php _e('This function basically copy (if any) the previous meta-field of each post to meta-field "Views" used by this WP Views Counter (aka WPeCounter). Replacing the current value of "Views" if it already exists.', 'wpecounter'); ?></small></p>
+									<h3><span class="dashicons dashicons-sos"></span><?php _e('Danger Area', 'wpecounter'); ?></h3>
+									<strong><?php _e('Be careful with these options. There are not undo. Be sure to make backup of postmeta table.', 'wpecounter'); ?></strong>
 									<p><label>
 											<input type="checkbox" class="checkbox" name="showimpo" value="1" onclick="jQuery('#metaimpo').toggle();" /> 
-											<?php _e('Show import area.', 'wpecounter'); ?></label>
+											<?php _e('Show Options.', 'wpecounter'); ?></label>
 									</p>
 									<div id="metaimpo" style="display:none;">
 										<div>
-											<strong><?php _e('Type name of custom meta field from another counter to import to WPeCounter Views meta field.', 'wpecounter'); ?></strong><br />
+											<h3><?php _e('Import other counters to WPeCounter Views', 'wpecounter'); ?></h3>
+											<p class="description"><?php _e('With this option you can import the numbers of visits that another script has stored in a custom-meta-field different that of WPeCounter.', 'wpecounter'); ?><br />
+												<?php _e('This function basically copy (if any) the previous meta-field of each post to meta-field "Views" used by this WP Views Counter (aka WPeCounter). Replacing the current value of "Views" if it already exists.', 'wpecounter'); ?>
+											</p>
+											<strong><?php _e('Type the name of custom meta field from another counter to import to WPeCounter Views meta field.', 'wpecounter'); ?></strong><br />
 											<div style="display: table;margin: 10px 0;">
 												<div style="display: table-cell;padding-right: 10px;">
 													<input type="text" class="normal-text" name="impofield" value="">
 												</div>
 											</div>
 										</div>
-										<?php submit_button(__('Proceed to Import'), 'primary', 'submit', false); ?>
+										<div>
+											<p>
+												<label>
+													<input type="checkbox" class="checkbox"  name="fixmeta" id="fixmeta" value="1"/> 
+													<?php _e('Check this only fo fix wrong column order in some post types.', 'wpecounter'); ?>
+												</label>
+											</p>
+
+										</div>
+										<?php submit_button(__('Proceed'), 'primary', 'submit', false); ?>
 									</div>
 
 								</div>
@@ -317,24 +328,33 @@ if (!class_exists('WPeCounterSettings')) {
 				$new_input[$key] = (!is_array($val) ) ? sanitize_text_field($val) : $val;
 			}
 
-			if (isset($_POST['showimpo']) && $_POST['showimpo'] == 1 && !empty($_POST['impofield'])) {
-				$impoviews = sanitize_text_field($_POST['impofield']);
+			/**
+			 * "showimpo" shows the 'Danger area' 
+			 */
+			if (isset($_POST['showimpo']) && $_POST['showimpo'] == 1) {
+				$impomessage = "";  // imported counters
+				$delemessage = __('All seems to be right.', 'wpecounter');  // Duplicated metafields deleted
+				$fixmmessage = "";  // Added meta fields zero values
+				$metafixed	 = 0;
+				$delemeta	 = 0;
+				$introws	 = 0;
+				$impoviews	 = sanitize_text_field($_POST['impofield']);
 				unset($_POST['impofield']);
 				unset($_POST['showimpo']);
+
+				if (!isset($WPeCounterViews)) {
+					$WPeCounterViews = new WPeCounterViews();
+				}
+				
+				/**
+				 * Import other metafields process
+				 */
 				if (!empty($impoviews)) {
-					if (!isset($WPeCounterViews)) {
-						$WPeCounterViews = new WPeCounterViews();
-					} 
-					
+
 					/**
-					 * Begins import process
+					 * Begins import process. By INSERT it will add new records to the table.
+					 * Duplicated records are deleted below.
 					 */
-					/* $introws = $wpdb->query( 
-					  $wpdb->prepare(
-					  "SELECT post_id, meta_key, meta_value FROM $wpdb->postmeta WHERE meta_key=%s
-					  ",
-					  $impoviews
-					  )); */
 					$introws = $wpdb->query(
 							$wpdb->prepare(
 									"INSERT INTO $wpdb->postmeta (post_id, meta_key, meta_value)(
@@ -343,12 +363,17 @@ if (!class_exists('WPeCounterSettings')) {
 									$WPeCounterViews->wpecounter_views_meta_key(),
 									$impoviews
 					));
+					// Prepare updated messages 
+					if ($introws > 0) {
+						$impomessage = __('Import success. Posts updated: ', 'wpecounter') . $introws;
+					} else {
+						$impomessage = __('There was no posts updated.', 'wpecounter');
+					}
 
 					/**
 					 * Checks if new key metafield is same old metafield to delete previous values and avoid to add duplicates metafields
 					 * IF import field also 'Views' then delete duplicates and keep the first (original)
 					 */
-					$delemessage = "";
 					if ($impoviews == $WPeCounterViews->wpecounter_views_meta_key()) {
 						/**
 						 * PHP Process
@@ -369,8 +394,9 @@ if (!class_exists('WPeCounterSettings')) {
 //								}
 //							}
 //						}
+
 						/**
-						 * SQL most dangerous but the best performance 
+						 * SQL more dangerous, but the best performance 
 						 * keep max(meta_id) because is the last and major number 
 						 */
 						$delemeta	 = $wpdb->query(
@@ -391,15 +417,47 @@ if (!class_exists('WPeCounterSettings')) {
 						);
 						$delemessage = "<br>" . __('Fixed duplicated metafields: ', 'wpecounter') . $delemeta;
 					}
+				}
 
+				/**
+				 * Add empty metafields to selected post types
+				 */
+				if (!empty($_POST['fixmeta'])) {
+					$metafield = $WPeCounterViews->wpecounter_views_meta_key();
 
-					if ($introws > 0) {
-						add_settings_error($this->SettingsPage, '', __('Import success. Posts updated: ', 'wpecounter') . $introws . $delemessage, 'success');
+					// Currently selected post types
+					$cpostypes	 = $new_input['cpostypes'];
+					$sPostTypes	 = "'" . implode("', '", array_keys($cpostypes)) . "'";
+
+					$metafixed = $wpdb->query(
+							$wpdb->prepare(
+									"INSERT INTO $wpdb->postmeta (post_id, meta_key, meta_value)(
+							SELECT ID, '$metafield' as meta_key, 0 as meta_value FROM $wpdb->posts as posts
+							WHERE   posts.post_type IN ($sPostTypes)
+								AND NOT EXISTS (
+									SELECT * FROM $wpdb->postmeta as postmeta
+									WHERE `postmeta`.`meta_key` = '$metafield'
+										AND `postmeta`.`post_id` = posts.ID
+								)
+								"
+							)
+					);
+
+					/**
+					 * Prepare messages 
+					 */
+					if ($metafixed > 0) {
+						$fixmmessage = __('Inserted metafields: ', 'wpecounter') . $metafixed;
 					} else {
-						add_settings_error($this->SettingsPage, '', __('There was no updates.', 'wpecounter') . $delemessage, 'warning');
+						$fixmmessage = __('There was no empty metafields.', 'wpecounter');
 					}
 				}
-			}
+				if ($metafixed > 0 || $delemeta > 0 || $introws > 0) {
+					add_settings_error($this->SettingsPage, '', $fixmmessage . '<br/>' . $impomessage . $delemessage, 'success');
+				} else {
+					add_settings_error($this->SettingsPage, '', $fixmmessage . '<br/>' . $delemessage, 'warning');
+				}
+			} // END Process Danger area
 
 			return apply_filters('sanitize_options_' . WPECOUNTER_PLUGIN_FILE, $new_input, $input);
 		}
