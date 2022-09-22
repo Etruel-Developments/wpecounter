@@ -61,8 +61,8 @@ if (!class_exists('WPeCounterSettings')) {
 		}
 
 		public function WPeCounter_adminfiles() {
-//			wp_enqueue_script('jquery-admin', WPECOUNTER_PLUGIN_URL . 'assets/js/admin.js', array('jquery'), WPECOUNTER_VERSION, true);
-//			wp_enqueue_style('styles-admin', WPECOUNTER_PLUGIN_URL . 'assets/css/admin.css');
+			wp_enqueue_script('jquery-admin', WPECOUNTER_PLUGIN_URL . 'assets/js/settings.js', array('jquery'), WPECOUNTER_VERSION, true);
+			wp_enqueue_style('styles-admin', WPECOUNTER_PLUGIN_URL . 'assets/css/settings.css');
 //			wp_localize_script('jquery-settings', 'wpecounter',
 //					array('ajax_url'		 => admin_url('admin-ajax.php'),
 //						'loading_image'	 => admin_url('images/spinner.gif'),
@@ -194,12 +194,17 @@ if (!class_exists('WPeCounterSettings')) {
 												</div>
 											</div>
 										</div>
+										<hr />
 										<div>
 											<p>
 												<label>
 													<input type="checkbox" class="checkbox"  name="fixmeta" id="fixmeta" value="1"/> 
 													<?php _e('Check this only fo fix wrong column order in some post types.', 'wpecounter'); ?>
 												</label>
+											</p>
+											<p class="description"><?php _e('Use with caution. This option allows you to add counters with zero value in all selected post types above.', 'wpecounter'); ?><br />
+												<?php _e('This function will insert all meta fields of each entry used by this WP Views Counter with the value "0" (zero) to fix some cases in which it might show an incorrect order in the list of posts.', 'wpecounter'); ?><br />
+												<?php _e('In very large databases it may give a Timeout, anyway you can run it again and again to complete the process.', 'wpecounter'); ?>
 											</p>
 
 										</div>
@@ -333,7 +338,7 @@ if (!class_exists('WPeCounterSettings')) {
 			 */
 			if (isset($_POST['showimpo']) && $_POST['showimpo'] == 1) {
 				$impomessage = "";  // imported counters
-				$delemessage = __('All seems to be right.', 'wpecounter');  // Duplicated metafields deleted
+				$delemessage = __('All seems to be fine.', 'wpecounter');  // Duplicated metafields deleted
 				$fixmmessage = "";  // Added meta fields zero values
 				$metafixed	 = 0;
 				$delemeta	 = 0;
@@ -345,7 +350,7 @@ if (!class_exists('WPeCounterSettings')) {
 				if (!isset($WPeCounterViews)) {
 					$WPeCounterViews = new WPeCounterViews();
 				}
-				
+
 				/**
 				 * Import other metafields process
 				 */
@@ -429,19 +434,58 @@ if (!class_exists('WPeCounterSettings')) {
 					$cpostypes	 = $new_input['cpostypes'];
 					$sPostTypes	 = "'" . implode("', '", array_keys($cpostypes)) . "'";
 
-					$metafixed = $wpdb->query(
-							$wpdb->prepare(
-									"INSERT INTO $wpdb->postmeta (post_id, meta_key, meta_value)(
-							SELECT ID, '$metafield' as meta_key, 0 as meta_value FROM $wpdb->posts as posts
-							WHERE   posts.post_type IN ($sPostTypes)
-								AND NOT EXISTS (
-									SELECT * FROM $wpdb->postmeta as postmeta
-									WHERE `postmeta`.`meta_key` = '$metafield'
-										AND `postmeta`.`post_id` = posts.ID
-								)
-								"
+					$query = "SELECT
+								ID,
+								post_type,
+								'$metafield',
+								0
+							FROM 
+								$wpdb->posts posts
+							WHERE 
+								posts.post_type IN ($sPostTypes) AND NOT EXISTS(
+									SELECT 
+										* 
+									FROM $wpdb->postmeta postmeta
+									WHERE 
+										postmeta.meta_key = '$metafield' AND postmeta.post_id = posts.ID
 							)
-					);
+					";
+
+					$results = $wpdb->get_results($query);
+
+					$insertQuery = "INSERT INTO $wpdb->postmeta (post_id,meta_key,meta_value) VALUES ";
+					$insertQueryValues	 = array();
+					foreach ($results as $value) {
+						$array = (array) $value;
+						unset($array['post_type']);
+						array_push($insertQueryValues, "(" . "'" . implode("', '", array_values($array)) . "'" . ")");
+					}
+					$insertValues = implode(",", $insertQueryValues);
+					$insertQuery .= $insertValues;
+					
+					$metafixed = $wpdb->query($insertQuery);
+//					var_dump($wpdb->last_query);
+
+//					$metafixed = $wpdb->query("
+//						INSERT INTO `$wpdb->postmeta` (`post_id`,`meta_key`,`meta_value`) 
+//						VALUES(
+//							SELECT
+//								`ID`, 
+//								'$metafield',
+//								0
+//							FROM 
+//								$wpdb->posts posts
+//							WHERE 
+//								`posts`.`post_type` IN ($sPostTypes) AND NOT EXISTS(
+//									SELECT 
+//										* 
+//									FROM $wpdb->postmeta postmeta
+//									WHERE 
+//										postmeta.meta_key = '$metafield' AND postmeta.post_id = posts.ID
+//							)
+//						)			
+//					");
+
 
 					/**
 					 * Prepare messages 

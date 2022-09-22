@@ -69,7 +69,7 @@ You can either install it automatically from the WordPress admin, or do it manua
 * Fixes the import process that if it uses same Views metafield the duplicate the metafields in each post.
 
 = 2.0 =
-1. New name! WP Views Counter. Make ir more realistic with it uses.
+1. New name! WP Views Counter. Make it more realistic with its uses.
 1. We made a brand new and coded from scratch. More solid. more robust, more lightweight.
 1. Added Legacy Widget! With list of most visited posts (types).
 1. Fixes the preview count when it only had to count visits at frontend.
