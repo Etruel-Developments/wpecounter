@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WPeCounter v1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-07 18:22-0300\n"
-"PO-Revision-Date: 2022-09-07 18:27-0300\n"
+"POT-Creation-Date: 2022-09-22 19:52-0300\n"
+"PO-Revision-Date: 2022-09-22 20:00-0300\n"
 "Last-Translator: Esteban Truelsegaard <esteban@netmdp.com>\n"
 "Language-Team: NetMdP <esteban@netmdp.com>\n"
 "Language: es_AR\n"
@@ -20,7 +20,7 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 
 # @ wpecounter
-#: includes/class-views.php:270
+#: includes/class-views.php:275
 msgid "Views"
 msgstr "Visitas"
 
@@ -65,14 +65,26 @@ msgid "Counter on Post types:"
 msgstr "Activar Contador en:"
 
 #: includes/settings.php:178
+msgid "Danger Area"
+msgstr "Área peligrosa"
+
+#: includes/settings.php:179
+msgid ""
+"Be careful with these options. There are not undo. Be sure to make backup of "
+"postmeta table."
+msgstr ""
+"Ten cuidado con esta opción! No se puede deshacer. Asegurate de tener un "
+"backup de la tabla postmeta."
+
+#: includes/settings.php:182
+msgid "Show Options."
+msgstr "Mostrar Opciones."
+
+#: includes/settings.php:186
 msgid "Import other counters to WPeCounter Views"
 msgstr "Importar desde otros contadores a WPeCounter"
 
-#: includes/settings.php:179
-msgid "Be careful with This option. There are not undo."
-msgstr "Ten cuidado con esta opción! No se puede deshacer."
-
-#: includes/settings.php:180
+#: includes/settings.php:187
 msgid ""
 "With this option you can import the numbers of visits that another script "
 "has stored in a custom-meta-field different that of WPeCounter."
@@ -80,7 +92,7 @@ msgstr ""
 "Con esta opción puede importar el número de visitas que otro script ha "
 "guardado en un meta-campo diferente al que usa WPeCounter."
 
-#: includes/settings.php:181
+#: includes/settings.php:188
 msgid ""
 "This function basically copy (if any) the previous meta-field of each post "
 "to meta-field \"Views\" used by this WP Views Counter (aka WPeCounter). "
@@ -90,29 +102,73 @@ msgstr ""
 "post al meta-campo \"Views\" usado por WP Views Counter.  Reemplazando el "
 "valor actual de \"Views\" si ya existe."
 
-#: includes/settings.php:184
-msgid "Show import area."
-msgstr "Mostrar area para importar."
-
-#: includes/settings.php:188
+#: includes/settings.php:190
 msgid ""
-"Type name of custom meta field from another counter to import to WPeCounter "
-"Views meta field."
+"Type the name of custom meta field from another counter to import to "
+"WPeCounter Views meta field."
 msgstr ""
 "Tipee el nombre del meta-campo del otro contador para importarlo al meta-"
 "campo \"Views\" de WPeCounter."
 
-#: includes/settings.php:195
-msgid "Proceed to Import"
-msgstr "Proceder a Importar"
+#: includes/settings.php:202
+msgid "Check this only fo fix wrong column order in some post types."
+msgstr ""
+"Compruebe esto sólo para arreglar el incorrecto orden por columnas en "
+"algunos tipos de entradas."
 
-#: includes/settings.php:340
+#: includes/settings.php:205
+msgid ""
+"Use with caution. This option allows you to add counters with zero value in "
+"all selected post types above."
+msgstr ""
+"Utilizar con precaución. Esta opción permite añadir contadores con valor "
+"cero en todos los Tipos de entrada seleccionados anteriormente."
+
+#: includes/settings.php:206
+msgid ""
+"This function will insert all meta fields of each entry used by this WP "
+"Views Counter with the value \"0\" (zero) to fix some cases in which it "
+"might show an incorrect order in the list of posts."
+msgstr ""
+"Esta función insertará todos los metacampos de cada entrada utilizada por "
+"este WP Views Counter con el valor “0” (cero) para solucionar algunos casos "
+"en los que podría mostrar un orden incorrecto en la lista de entradas."
+
+#: includes/settings.php:207
+msgid ""
+"In very large databases it may give a Timeout, anyway you can run it again "
+"and again to complete the process."
+msgstr ""
+"En bases de datos muy grandes puede dar un Timeout, de todas formas puedes "
+"ejecutarlo una y otra vez para completar el proceso."
+
+#: includes/settings.php:211
+msgid "Proceed"
+msgstr "Proceder"
+
+#: includes/settings.php:341
+msgid "All seems to be fine."
+msgstr "Todo parece estar bien."
+
+#: includes/settings.php:373
 msgid "Import success. Posts updated: "
 msgstr "Éxito al importar. Entradas Actualizadas: "
 
-#: includes/settings.php:342
-msgid "There was no updates."
-msgstr "No hay actualizaciones."
+#: includes/settings.php:375
+msgid "There was no posts updated."
+msgstr "No se actualizaron entradas."
+
+#: includes/settings.php:423
+msgid "Fixed duplicated metafields: "
+msgstr "Meta campos duplicados solucionados: "
+
+#: includes/settings.php:494
+msgid "Inserted metafields: "
+msgstr "Meta campos insertados: "
+
+#: includes/settings.php:496
+msgid "There was no empty metafields."
+msgstr "No había metadatos vacíos."
 
 # @ wpecounter
 #: includes/widget.php:43
@@ -138,6 +194,12 @@ msgstr "Orden:"
 #: includes/widget.php:214
 msgid "Show views count?"
 msgstr "Mostrar Conteo?"
+
+#~ msgid "Show import area."
+#~ msgstr "Mostrar area para importar."
+
+#~ msgid "Proceed to Import"
+#~ msgstr "Proceder a Importar"
 
 # @ wpecounter
 #~ msgid "Thanks for test, use and enjoy this plugin."

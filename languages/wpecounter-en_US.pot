@@ -1,12 +1,12 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: WPeCounter v1.0\n"
+"Project-Id-Version: WPeCounter 2.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-07 18:22-0300\n"
+"POT-Creation-Date: 2022-09-22 20:00-0300\n"
 "PO-Revision-Date: 2014-01-31 13:07-0300\n"
 "Last-Translator: Esteban Truelsegaard <esteban@netmdp.com>\n"
-"Language-Team: \n"
+"Language-Team: hello@etruel.com\n"
 "Language: en_US\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,7 +20,7 @@ msgstr ""
 "X-Textdomain-Support: yes\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: includes/class-views.php:270
+#: includes/class-views.php:275
 msgid "Views"
 msgstr ""
 
@@ -61,46 +61,91 @@ msgid "Counter on Post types:"
 msgstr ""
 
 #: includes/settings.php:178
-msgid "Import other counters to WPeCounter Views"
+msgid "Danger Area"
 msgstr ""
 
 #: includes/settings.php:179
-msgid "Be careful with This option. There are not undo."
+msgid ""
+"Be careful with these options. There are not undo. Be sure to make backup "
+"of postmeta table."
 msgstr ""
 
-#: includes/settings.php:180
+#: includes/settings.php:182
+msgid "Show Options."
+msgstr ""
+
+#: includes/settings.php:186
+msgid "Import other counters to WPeCounter Views"
+msgstr ""
+
+#: includes/settings.php:187
 msgid ""
 "With this option you can import the numbers of visits that another script "
 "has stored in a custom-meta-field different that of WPeCounter."
 msgstr ""
 
-#: includes/settings.php:181
+#: includes/settings.php:188
 msgid ""
 "This function basically copy (if any) the previous meta-field of each post "
 "to meta-field \"Views\" used by this WP Views Counter (aka WPeCounter). "
 "Replacing the current value of \"Views\" if it already exists."
 msgstr ""
 
-#: includes/settings.php:184
-msgid "Show import area."
-msgstr ""
-
-#: includes/settings.php:188
+#: includes/settings.php:190
 msgid ""
-"Type name of custom meta field from another counter to import to WPeCounter "
-"Views meta field."
+"Type the name of custom meta field from another counter to import to "
+"WPeCounter Views meta field."
 msgstr ""
 
-#: includes/settings.php:195
-msgid "Proceed to Import"
+#: includes/settings.php:202
+msgid "Check this only fo fix wrong column order in some post types."
 msgstr ""
 
-#: includes/settings.php:340
+#: includes/settings.php:205
+msgid ""
+"Use with caution. This option allows you to add counters with zero value in "
+"all selected post types above."
+msgstr ""
+
+#: includes/settings.php:206
+msgid ""
+"This function will insert all meta fields of each entry used by this WP "
+"Views Counter with the value \"0\" (zero) to fix some cases in which it "
+"might show an incorrect order in the list of posts."
+msgstr ""
+
+#: includes/settings.php:207
+msgid ""
+"In very large databases it may give a Timeout, anyway you can run it again "
+"and again to complete the process."
+msgstr ""
+
+#: includes/settings.php:211
+msgid "Proceed"
+msgstr ""
+
+#: includes/settings.php:341
+msgid "All seems to be fine."
+msgstr ""
+
+#: includes/settings.php:373
 msgid "Import success. Posts updated: "
 msgstr ""
 
-#: includes/settings.php:342
-msgid "There was no updates."
+#: includes/settings.php:375
+msgid "There was no posts updated."
+msgstr ""
+
+#: includes/settings.php:423
+msgid "Fixed duplicated metafields: "
+msgstr ""
+
+#: includes/settings.php:494
+msgid "Inserted metafields: "
+msgstr ""
+
+#: includes/settings.php:496
+msgid "There was no empty metafields."
 msgstr ""
 
 #: includes/widget.php:43

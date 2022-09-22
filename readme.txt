@@ -67,6 +67,7 @@ You can either install it automatically from the WordPress admin, or do it manua
 * Added Danger Zone in Settings allowing to fix failed imports, duplicated metafields and empty fields processes.
 * Improved column order query in all post types lists.
 * Fixes the import process that if it uses same Views metafield the duplicate the metafields in each post.
+* Updated POT and Spanish language files.
 
 = 2.0 =
 1. New name! WP Views Counter. Make it more realistic with its uses.
