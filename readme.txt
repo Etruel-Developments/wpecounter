@@ -1,11 +1,11 @@
 === WP Views Counter ===
 Contributors: etruel, khaztiel
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7267TH4PT3GSW
-Tags: views, visit counter, visits counter, post views, visits, counter, post visits, ajax counter, page count, count visits, popular posts.
+Tags: views, count visits, post views, post visits, ajax counter
 Requires at least: 3.1
-Tested up to: 6.0.2
-Requires PHP: 5.2
-Stable tag: trunk
+Tested up to: 6.5.4
+Requires PHP: 5.6
+Stable tag: 2.0.2
 License: GPLv2
 
 Visits Post(types) counter. Shown the number of visits on lists of posts, pages and/or custom post types and shortcode.
@@ -62,6 +62,10 @@ You can either install it automatically from the WordPress admin, or do it manua
 1. Legacy Widget to Display Popular Posts (types).
 
 == Changelog ==
+
+= 2.0.2 - Jun 01, 2024 =
+* Bump to WP 6.5.4
+* Fixes on loading language files.
 
 = 2.0.1 =
 * Added Danger Zone in Settings allowing to fix failed imports, duplicated metafields and empty fields processes.

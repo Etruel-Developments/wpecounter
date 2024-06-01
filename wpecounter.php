@@ -3,7 +3,7 @@
  * Plugin Name:  WP Views Counter
  * Plugin URI:   https://etruel.com/downloads/wpecounter
  * Description:  Counts visits on post lists, pages and/or custom post types. It also displays them in posts, pages or text widget content, shortcode [WPeCounter].
- * Version:		 2.0.1
+ * Version:		 2.0.2
  * Author:		 Etruel Developments LLC
  * Author URI:	 https://etruel.com
  * Text Domain:  wpecounter
@@ -14,7 +14,7 @@ if (!function_exists('add_filter'))
 	exit;
 // Plugin version
 if (!defined('WPECOUNTER_VERSION'))
-	define('WPECOUNTER_VERSION', '2.0.1');
+	define('WPECOUNTER_VERSION', '2.0.2');
 
 if (!class_exists('WPeCounter')) :
 
@@ -32,7 +32,7 @@ if (!class_exists('WPeCounter')) :
 		function __construct() {
 			$this->setupGlobals();
 			$this->includes();
-//			$this->load_textdomain();
+			$this->load_textdomain();
 			$this->hooks();
 		}
 
@@ -90,29 +90,10 @@ if (!class_exists('WPeCounter')) :
 		}
 
 		public function load_textdomain() {
-
 			// Set filter for plugin's languages directory
 			$lang_dir	 = dirname(plugin_basename(__FILE__)) . '/languages/';
 			$lang_dir	 = apply_filters('wpecounter_languages_directory', $lang_dir);
-
-			// Traditional WordPress plugin locale filter
-			$locale	 = apply_filters('plugin_locale', get_locale(), 'wpecounter');
-			$mofile	 = sprintf('%1$s-%2$s.mo', 'wpecounter', $locale);
-
-			// Setup paths to current locale file
-			$mofile_local	 = $lang_dir . $mofile;
-			$mofile_global	 = WP_LANG_DIR . '/wpecounter/' . $mofile;
-
-			if (file_exists($mofile_global)) {
-				// Look in global /wp-content/languages/wpecounter/ folder
-				load_textdomain('wpecounter', $mofile_global);
-			} elseif (file_exists($mofile_local)) {
-				// Look in local /wp-content/plugins/wpecounter/languages/ folder
-				load_textdomain('wpecounter', $mofile_local);
-			} else {
-				// Load the default language files
-				load_plugin_textdomain('wpecounter', false, $lang_dir);
-			}
+			load_plugin_textdomain('wpecounter', false, $lang_dir);
 		}
 
 	}
