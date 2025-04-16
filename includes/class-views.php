@@ -294,35 +294,32 @@ if (!class_exists('WPeCounterViews')) {
 
 		public function views_column_orderby($query) {
 			global $pagenow, $post_type;
+			if ('edit.php' !== $pagenow || !is_admin() || !$query->is_main_query()) {
+				return;
+			}
+
 			$orderby = $query->get('orderby');
-//			if ('edit.php' != $pagenow || empty($orderby) )
-//				return;
-			switch ($orderby) {
-				case 'post_views':
+			$order = strtoupper($query->get('order')) === 'ASC' ? 'ASC' : 'DESC'; // Default to DESC if not set
 
-					$query->set('meta_query', array(
-						'sort_column'	 => 'post_views',
-						'relation'		 => 'OR',
-						'views_clause'	 => array(
-							'key'	 => $this->wpecounter_views_meta_key(),
-							'type'	 => 'numeric'
-						),
-						'noviews_clause' => array(
-							'key'		 => $this->wpecounter_views_meta_key(),
-							'compare'	 => 'NOT EXISTS'
-						)
-					));
+			if ('post_views' === $orderby) {
+				$query->set('meta_query', array(
+					'relation'		 => 'OR',
+					'views_clause'	 => array(
+						'key'	 => $this->wpecounter_views_meta_key(),
+						'type'	 => 'numeric'
+					),
+					'noviews_clause' => array(
+						'key'		 => $this->wpecounter_views_meta_key(),
+						'compare'	 => 'NOT EXISTS'
+					)
+				));
 
-//					$query->set('meta_key', $this->wpecounter_views_meta_key() );
-//					$query->set('meta_type', 'NUMERIC');
-//					$query->set('suppress_filters', false);
-//					$query->set('hide_empty', false);
+				var_dump($order);
+				if($order == 'DESC'){
+					$query->set('orderby', 'noviews_clause');
+				}else{
 					$query->set('orderby', 'meta_value_num');
-
-					break;
-
-				default:
-					break;
+				}
 			}
 		}
 
