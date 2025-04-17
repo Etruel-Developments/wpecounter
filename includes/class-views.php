@@ -310,7 +310,8 @@ if (!class_exists('WPeCounterViews')) {
 					),
 					'noviews_clause' => array(
 						'key'		 => $this->wpecounter_views_meta_key(),
-						'compare'	 => 'NOT EXISTS'
+						'compare'	 => 'NOT EXISTS',
+						'type'	 => 'numeric'
 					)
 				));
 
