@@ -63,6 +63,10 @@ You can either install it automatically from the WordPress admin, or do it manua
 
 == Changelog ==
 
+= 2.0.3 (Abr 22, 2025) =
+* Improves and fix the sales comission
+* Restriction with taxes to create the product
+
 = 2.0.2 - Jun 01, 2024 =
 * Bump to WP 6.5.4
 * Fixes on loading language files.

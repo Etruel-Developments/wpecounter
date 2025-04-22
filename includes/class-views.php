@@ -315,7 +315,6 @@ if (!class_exists('WPeCounterViews')) {
 					)
 				));
 
-				var_dump($order);
 				if($order == 'DESC'){
 					$query->set('orderby', 'noviews_clause');
 				}else{

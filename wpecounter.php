@@ -3,7 +3,7 @@
  * Plugin Name:  WP Views Counter
  * Plugin URI:   https://etruel.com/downloads/wpecounter
  * Description:  Counts visits on post lists, pages and/or custom post types. It also displays them in posts, pages or text widget content, shortcode [WPeCounter].
- * Version:		 2.0.2
+ * Version:		 2.0.3
  * Author:		 Etruel Developments LLC
  * Author URI:	 https://etruel.com
  * Text Domain:  wpecounter
@@ -14,7 +14,7 @@ if (!function_exists('add_filter'))
 	exit;
 // Plugin version
 if (!defined('WPECOUNTER_VERSION'))
-	define('WPECOUNTER_VERSION', '2.0.2');
+	define('WPECOUNTER_VERSION', '2.0.3');
 
 if (!class_exists('WPeCounter')) :
 
