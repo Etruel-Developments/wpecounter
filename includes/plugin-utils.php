@@ -123,7 +123,7 @@ if (!class_exists('WPeCounterPluginUtils')) {
 					}
 				}
 			}
-			delete_option(self :: OPTION_KEY);
+			delete_option('WPeCounter_Options');
 		}
 
 	}
