@@ -63,6 +63,9 @@ You can either install it automatically from the WordPress admin, or do it manua
 
 == Changelog ==
 
+= 2.0.4 (Jun 2, 2025) =
+* Improves the vulnerability to Cross Site Scripting (XSS)
+
 = 2.0.3 (Abr 22, 2025) =
 * Improves and fix the sales comission
 * Restriction with taxes to create the product
