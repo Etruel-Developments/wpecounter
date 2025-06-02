@@ -1,11 +1,11 @@
 === WP Views Counter ===
-Contributors: etruel, khaztiel
+Contributors: etruel, khaztiel, gerarjos14
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7267TH4PT3GSW
 Tags: views, count visits, post views, post visits, ajax counter
 Requires at least: 3.1
-Tested up to: 6.5.4
+Tested up to: 6.8
 Requires PHP: 5.6
-Stable tag: 2.0.2
+Stable tag: 2.0.3
 License: GPLv2
 
 Visits Post(types) counter. Shown the number of visits on lists of posts, pages and/or custom post types and shortcode.
@@ -63,12 +63,10 @@ You can either install it automatically from the WordPress admin, or do it manua
 
 == Changelog ==
 
-= 2.0.4 (Jun 2, 2025) =
-* Improves the vulnerability to Cross Site Scripting (XSS)
-
-= 2.0.3 (Abr 22, 2025) =
-* Improves and fix the sales comission
-* Restriction with taxes to create the product
+= 2.0.3 - Apr 22, 2025 =
+> * Fixed incorrect posts order when clicking on the Views column header.
+> * Fixed a fatal error occurring during plugin uninstallation.
+> * Bump to WP 6.8
 
 = 2.0.2 - Jun 01, 2024 =
 * Bump to WP 6.5.4
@@ -114,4 +112,4 @@ You can either install it automatically from the WordPress admin, or do it manua
 First Release
 
 == Upgrade Notice ==
-1. Major Upgrade. 
+1. Recommended Upgrade. 
