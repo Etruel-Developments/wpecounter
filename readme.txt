@@ -5,7 +5,7 @@ Tags: views, count visits, post views, post visits, ajax counter
 Requires at least: 3.1
 Tested up to: 6.8
 Requires PHP: 5.6
-Stable tag: 2.0.3
+Stable tag: 2.0.4
 License: GPLv2
 
 Visits Post(types) counter. Shown the number of visits on lists of posts, pages and/or custom post types and shortcode.
@@ -62,6 +62,9 @@ You can either install it automatically from the WordPress admin, or do it manua
 1. Legacy Widget to Display Popular Posts (types).
 
 == Changelog ==
+
+= 2.0.4 (Jun 2, 2025) =
+* Improves the vulnerability to Cross Site Scripting (XSS)
 
 = 2.0.3 - Apr 22, 2025 =
 > * Fixed incorrect posts order when clicking on the Views column header.
