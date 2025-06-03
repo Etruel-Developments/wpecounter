@@ -42,11 +42,17 @@ function wpecounter_get_post_views( $args = array() ) {
 		'before'  => '',
 		'after'   => '',
 		/* Translators: %s is the number of views a post has. */
-		'text'    => '%s', //_n_noop( '%s View', '%s Views', 'wpecounter' ),
+		'text'    => _n_noop( '%s View', '%s Views', 'wpecounter' ), //_n_noop( '%s View', '%s Views', 'wpecounter' ),
 		'wrap'    => '<span %s>%s</span>'
 	);
 
-	$args = wp_parse_args( $args, $defaults );
+	
+
+	$args = array_filter($args, function ($value) {
+		return !is_null($value) && $value !== '';
+	});
+	$args = wp_parse_args($args, $defaults);
+
 	
 	if (!isset($WPeCounterViews))
 		$WPeCounterViews = new WPeCounterViews();
