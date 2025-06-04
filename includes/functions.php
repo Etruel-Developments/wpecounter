@@ -23,7 +23,7 @@ if (!defined('ABSPATH')) {
  * @return void
  */
 function wpecounter_post_views( $args = array() ) {
-	echo wpecounter_get_post_views( $args );
+	echo wp_kses_post( wpecounter_get_post_views( $args ) );
 }
 
 /**
@@ -42,33 +42,30 @@ function wpecounter_get_post_views( $args = array() ) {
 		'before'  => '',
 		'after'   => '',
 		/* Translators: %s is the number of views a post has. */
-		'text'    => _n_noop( '%s View', '%s Views', 'wpecounter' ), //_n_noop( '%s View', '%s Views', 'wpecounter' ),
-		'wrap'    => '<span %s>%s</span>'
+		'text'    => '%s', //_n_noop( '%s View', '%s Views', 'wpecounter' ),
+		'wrap'    => '<span %s>%s</span>',
 	);
 
-	
+	$args = wp_parse_args( $args, $defaults );
 
-	$args = array_filter($args, function ($value) {
-		return !is_null($value) && $value !== '';
-	});
-	$args = wp_parse_args($args, $defaults);
-
-	
-	if (!isset($WPeCounterViews))
+	if ( ! isset( $WPeCounterViews ) ) {
 		$WPeCounterViews = new WPeCounterViews();
-	
+	}
+
 	$views = $WPeCounterViews->get_post_views_count( $args['post_id'] );
 
-	$text = is_array( $args['text'] ) ? translate_nooped_plural( $args['text'], $views ) : $args['text'];
-	
-	$args['before'] = wp_kses_post($args['before']);
-	$args['after']  = wp_kses_post($args['after']);
+	// If 'text' is empty, use default value
+	$text = ( $args['text'] === '' ) ? $defaults['text'] : $args['text'];
+	$text = is_array( $text ) ? translate_nooped_plural( $text, $views ) : $text;
 
-	$html = sprintf(
+	// Prepare output
+	$attributes = 'class="wpecounter" itemprop="interactionCount" itemscope="itemscope" itemtype="http://schema.org/UserPageVisits"';
+	$views_text = sprintf( esc_html( $text ), esc_html( $views ) );
+	$html = sprintf( 
 		$args['wrap'], 
-		'class="wpecounter" itemprop="interactionCount" itemscope="itemscope" itemtype="http://schema.org/UserPageVisits"', 
-		sprintf( $text, $views )
-	);
+			$attributes, 
+			$views_text 
+			);
 
-	return $args['before'] . $html . $args['after'];
+	return wp_kses_post( $args['before'] ) . $html . wp_kses_post( $args['after'] );
 }

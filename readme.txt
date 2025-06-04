@@ -1,77 +1,86 @@
 === WP Views Counter ===
-Contributors: etruel, khaztiel, gerarjos14
-Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7267TH4PT3GSW
-Tags: views, count visits, post views, post visits, ajax counter
-Requires at least: 3.1
-Tested up to: 6.8
-Requires PHP: 5.6
-Stable tag: 2.0.4
-License: GPLv2
+Contributors: etruel, khaztiel, gerarjos14  
+Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7267TH4PT3GSW  
+Tags: views, count visits, post views, post visits, ajax counter  
+Requires at least: 3.1  
+Tested up to: 6.8  
+Requires PHP: 5.6  
+Stable tag: 2.0.4  
+License: GPLv2  
 
-Visits Post(types) counter. Shown the number of visits on lists of posts, pages and/or custom post types and shortcode.
+A lightweight and powerful post views counter. Displays visits in post lists and via shortcode or widget. Ideal for tracking popularity across all post types.
 
 == Description ==
 
-Knows how much views has every post, page or custom post type, just on wordpress list. 
-You can select on plugin settings, which types must count.  Also you can print using shortcode [WPeCounter] in widgets, post or pages. 
+**WP Views Counter** lets you see how many views each post, page or custom post type entry has directly in the WordPress admin list table or with a shortcode.
 
-Works with Easy Digital Downloads Products to see how many views has every Download, also with other plugins that work with public custom post types.
+Perfect for bloggers, marketers and eCommerce site owners, this plugin is designed for speed and simplicity. Whether you're running a WooCommerce shop, an Easy Digital Downloads store, or a content-heavy blog — you'll benefit from knowing what content your users engage with the most.
 
-Is extremely lightweight because it works with ajax.  
+The counter is AJAX-based, making it efficient and non-intrusive, even on high-traffic sites.
 
-Developer and bugtracker on github repository: https://github.com/Etruel-Developments/wpecounter/issues
+= Why choose WP Views Counter? =
 
-Feel free to fork it and propose new enhancements or Pull Requests.
+✅ **Fast and lightweight** — built for performance  
+✅ **Seamless integration** with all custom post types  
+✅ **Easy Digital Downloads compatible**  
+✅ **Popular posts widget included**  
+✅ **Counts views via shortcode or in admin columns**  
+✅ **Multilingual ready**
 
-= Features =
+Unlike bloated analytics plugins, WP Views Counter focuses only on what matters: showing you the view count where you need it.
 
-* Widget with list of most popular posts (types).
-* Configurable visit counter by Custom Post Types.
-* Allow to "Order By Visits" on all selected Post (types) lists.
-* Compatibility with Easy Digital Downloads.
-* Allow to import meta-fields from other counters.
-* Multilanguage Ready.
+Developer-friendly on GitHub: https://github.com/Etruel-Developments/wpecounter/issues  
+We welcome forks, feedback and pull requests.
 
-= Features Comming Soon =
-1. Options to doesn't count logged in users, or per role selected in settings.
-1. Select the column order to display the Views column in every post type list.
+== Features ==
 
-At initial versions we used "Entry views" script created by Justin Tadlock with GPLv2. 
-There is little unmodified code left from those early days, but we are very grateful to him for his work.
-Hope you can also enjoy this plugin.
+* Display post views in the admin post list columns.
+* Count views on any custom post type.
+* Shortcode `[WPeCounter]` to display views anywhere.
+* AJAX-based counting — no page reloads needed.
+* Order admin lists by view count.
+* Easy Digital Downloads (EDD) integration: track views for Downloads.
+* Legacy widget to show most visited posts or products.
+* Import views from other counters.
+* Fully translatable — multilingual support out of the box.
+
+== Coming Soon ==
+
+* Option to ignore visits from logged-in users or specific roles.
+* Choose display position of Views column per post type.
 
 == Frequently Asked Questions ==
 
-= Can I upgrade to version 2.0 without losing the counters from previous versions? =
-
-Yes, the 2.0 major version will import the previous settings and counters. You can also import other custom fields. However, make a backup copy!
+= Can I upgrade from an older version without losing data? =  
+Yes. Version 2.0+ automatically imports your previous data and settings. You can also manually import custom view fields. Always make a backup first.
 
 == Installation ==
 
-You can either install it automatically from the WordPress admin, or do it manually:
-
-1. Unzip "WP Views Counter" archive and put the folder into your plugins folder (/wp-content/plugins/).
-1. Activate the plugin through the 'Plugins' menu in WordPress
-1. You'll see a new column with Views on WordPress pages/posts/types list screen.
-1. For print use shortcode [WPeCounter] in widgets, post or pages.
+1. Upload the plugin to `/wp-content/plugins/` and unzip it.
+2. Activate via the **Plugins** menu in WordPress.
+3. Configure settings under **Settings → WP Views Counter**.
+4. Use `[WPeCounter]` in content or widgets to display views.
 
 == Screenshots ==
 
 1. Admin settings page.
-1. Showing on posts list.
-1. Legacy Widget to Display Popular Posts (types).
+2. Views displayed in post list.
+3. Widget showing popular posts by views.
 
 == Changelog ==
 
-= 2.0.4 (Jun 2, 2025) =
-* Improves the vulnerability to Cross Site Scripting (XSS)
+= 2.0.4 – Jun 4, 2025 =
+* Improved output sanitization and escaping for enhanced security.
+* Fixed minor issues reported in compatibility scans.
+* General code quality and performance improvements.
+* Fully compatible with WordPress 6.8.
 
-= 2.0.3 - Apr 22, 2025 =
-> * Fixed incorrect posts order when clicking on the Views column header.
-> * Fixed a fatal error occurring during plugin uninstallation.
-> * Bump to WP 6.8
+= 2.0.3 – Apr 22, 2025 =
+* Fixed incorrect posts order when clicking on the Views column header.
+* Fixed a fatal error occurring during plugin uninstallation.
+* Bump to WP 6.8
 
-= 2.0.2 - Jun 01, 2024 =
+= 2.0.2 – Jun 01, 2024 =
 * Bump to WP 6.5.4
 * Fixes on loading language files.
 
@@ -82,37 +91,34 @@ You can either install it automatically from the WordPress admin, or do it manua
 * Updated POT and Spanish language files.
 
 = 2.0 =
-1. New name! WP Views Counter. Make it more realistic with its uses.
-1. We made a brand new and coded from scratch. More solid. more robust, more lightweight.
-1. Added Legacy Widget! With list of most visited posts (types).
-1. Fixes the preview count when it only had to count visits at frontend.
-1. Language POT and es_ES files updated.
-1. Tested on Wordpress 6.0.2
+* New name: WP Views Counter — better reflects its functionality.
+* Rewritten from scratch — faster, more robust, more extensible.
+* New Legacy Widget with list of most visited posts.
+* Fixes frontend-only view counting behavior.
+* Updated language files and tested with WordPress 6.0.2.
 
 = 1.2 =
-1. Added Compatibility with Easy Digital Downloads. 
-1. Fixes for many other Custom Post Types. 
-1. Moved the Views column to the end.
-1. Tested on Wordpress 4.5
+* Added compatibility with Easy Digital Downloads.
+* Fixes for other Custom Post Types.
+* Adjusted Views column position.
 
 = 1.1.2 =
-1. Compatible with php 5.4. Lot of Strict Standars PHP Warning and notices fixed.
-1. Fix another notice on Entry views script on php>=5.4
+* Fixed PHP warnings and strict standard issues (5.4+).
+* Improved compatibility.
 
 = 1.1.1 =
-1. Fix some cases of "Call to undefined function get_plugin_data()".
-1. Language POT and es_ES files updated.
-1. Preparing for popular posts(types) widget. ;)
+* Fixed "Call to undefined function get_plugin_data()" error.
+* Updated translations.
 
 = 1.1 =
-1. Added "Order By Visits" feature on post(types) list.
-1. Changed order of Views column to appear left side of comments column in post(type) list.
-1. Added Feature Import meta-fields from other counters.
-1. Added Serbo-Croatian Language thanks to [Borisa Djuraskovic](http://www.webhostinghub.com)
-1. Minnor fix on selecting columns to view in Wordpress display settings.
+* New: “Order by Visits” on admin post list.
+* Views column position changed next to Comments column.
+* Meta-field importer for other counter plugins.
+* Added Serbo-Croatian translation.
 
 = 1.0 =
-First Release
+Initial Release.
 
 == Upgrade Notice ==
-1. Recommended Upgrade. 
+= 2.0.4 =
+Recommended security and stability update. Compatible with WordPress 6.8.
