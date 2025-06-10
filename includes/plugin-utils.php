@@ -6,36 +6,149 @@ if (!defined('ABSPATH')) {
 	exit();
 }
 
-/* function boilerplate_license_menu() {
-  add_submenu_page(
-  'edit.php?post_type=wpematico',
-  'Boilerplate Settings',
-  'BoilerPlate <span class="dashicons-before dashicons-admin-plugins"></span>',
-  'manage_options',
-  'boilerplate_license',
-  'boilerplate_license_page'
-  );
-  //add_plugins_page( 'Plugin License', 'Plugin License', 'manage_options', 'boilerplate_license', 'boilerplate_license_page' );
-  }
-  add_action('admin_menu', 'boilerplate_license_menu');
- */
-
 
 
 if (!class_exists('WPeCounterPluginUtils')) {
 
 	class WPeCounterPluginUtils {
 
+		// Constructor: Hooks into WordPress actions and filters
 		function __construct() {
-//			add_filter('admin_init', array(__CLASS__, 'init'), 10, 2);
-//		}
-//
-//		public static function init() {
-			//Additional links on the plugin page
+			// Register the block during init
+			add_action('init', array(__CLASS__, 'mvpb_register_block'));
+
+			// Enqueue editor assets for the block
+			add_action('enqueue_block_editor_assets', array(__CLASS__, 'wpecounter_enqueue_block_editor_assets'));
+
+			// Add a custom block category to the block editor
+			add_filter('block_categories_all', function ($categories, $post) {
+				$custom_category = [
+					[
+						'slug'  => 'wpecounter',
+						'title' => __('WP Views Counter', 'wpecounter'),
+						'icon'  => 'visibility', // Optional icon
+					],
+				];
+				// Add the custom category at the beginning of the list
+				return array_merge($custom_category, $categories);
+			}, 10, 2);
+
+			// Add custom links in the plugin list
 			add_filter('plugin_row_meta', array(__CLASS__, 'init_row_meta'), 10, 2);
 			add_filter('plugin_action_links_' . plugin_basename(WPECOUNTER_PLUGIN_FILE), array(__CLASS__, 'init_action_links'));
 		}
 
+		// Register the dynamic block and link the render callback
+		public static function mvpb_register_block() {
+			register_block_type(WPECOUNTER_PLUGIN_DIR, array(
+				'render_callback' => array(__CLASS__, 'mvpb_render_most_viewed'),
+			));
+		}
+
+		// Render callback for the dynamic block (frontend output)
+		public static function mvpb_render_most_viewed($attributes){
+			// Set default values for attributes
+			if (! isset($attributes['postType'])) {
+				$attributes['postType'] = 'post';
+			}
+			if (! isset($attributes['limit'])) {
+				$attributes['limit'] = 5;
+			}
+			if (! isset($attributes['order'])) {
+				$attributes['order'] = 'DESC';
+			}
+			if (! isset($attributes['title'])) {
+				$attributes['title'] = __('Most Viewed Posts', 'text-domain');
+			}
+
+			// Instantiate the views counter object if not already set
+			if (!isset($WPeCounterViews)) {
+				$WPeCounterViews = new WPeCounterViews();
+			}
+
+			// Query arguments to retrieve the most viewed posts
+			$args = array(
+				'post_type'           => sanitize_text_field($attributes['postType']),
+				'posts_per_page'      => intval($attributes['limit']),
+				'post_status'         => 'publish',
+				'meta_key'            => $WPeCounterViews->wpecounter_views_meta_key(),
+				'orderby'             => 'meta_value_num',
+				'order'               => in_array(strtoupper($attributes['order']), ['ASC', 'DESC']) ? strtoupper($attributes['order']) : 'DESC',
+				'no_found_rows'       => true,
+				'ignore_sticky_posts' => true,
+			);
+
+			$posts = get_posts($args);
+
+			// If no posts found, return fallback message
+			if (empty($posts)) {
+				return '<p>' . esc_html__('No popular posts found.', 'text-domain') . '</p>';
+			}
+
+			// Wrapper with dynamic block attributes (e.g., className, etc.)
+			$wrapper = get_block_wrapper_attributes();
+
+			// Start building HTML output
+			$output  = "<div {$wrapper}>";
+			$output .= '<div class="mvpb-block">';
+			$output .= '<h3 class="mvpb-block-title">' . esc_html($attributes['title']) . '</h3>';
+			$output .= '<ul class="mvpb-post-list">';
+
+			// Loop through the posts and create a list item for each
+			foreach ($posts as $post) {
+				$title = esc_html(get_the_title($post->ID));
+				$url   = esc_url(get_permalink($post->ID));
+				$views = $WPeCounterViews->get_post_views_count($post->ID);
+				$output .= "<li class='mvpb-post-item'>📈 <a href='{$url}'>{$title}</a> – {$views} " . esc_html__('views', 'text-domain') . "</li>";
+			}
+
+			$output .= '</ul>';
+			$output .= '</div>';
+			$output .= '</div>';
+
+			return $output;
+		}
+
+		// Enqueue JavaScript and pass data to the block editor
+		public static function wpecounter_enqueue_block_editor_assets(){
+			wp_enqueue_script(
+				'wpecounter-block-editor', WPECOUNTER_PLUGIN_DIR . 'build/index.js',
+			);
+
+			// Get plugin options
+			$options = get_option('WPeCounter_Options');
+			$cpostypes = isset($options['cpostypes']) ? (array) $options['cpostypes'] : [];
+			
+			// Get all public post types
+			$args = array('public' => true);
+			$post_types = get_post_types($args, 'names');
+
+			// List of post types to exclude
+			$exclude = array('attachment', 'revision', 'nav_menu_item');
+
+			// Filter post types based on user settings and exclusion list
+			$post_types_filtered = array_filter($post_types, function ($pt) use ($exclude, $cpostypes) {
+				return !in_array($pt, $exclude, true) && isset($cpostypes[$pt]) && $cpostypes[$pt] === '1';
+			});
+
+			// Format the post types for Select dropdown in block editor
+			$select_options = [];
+			foreach ($post_types_filtered as $pt) {
+				$select_options[] = [
+					'label' => ucfirst($pt),
+					'value' => $pt,
+				];
+			}
+
+			// Pass the data to the block editor script
+			wp_localize_script(
+				'wpecounter-block-editor',
+				'wpecounterData',
+				array(
+					'postTypes' => $select_options,
+				)
+			);
+		}
 		/**
 		 * Actions-Links del Plugin
 		 *

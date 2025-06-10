@@ -180,7 +180,7 @@ if (!class_exists('WPeCounterViews')) {
 					}
 				} else {
 					// If no roles are restricted, count the view for all logged-in users
-					$should_count = true;
+					$should_count = false;
 				}
 			}
 

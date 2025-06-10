@@ -1,0 +1,35 @@
+.mvpb-block {
+    padding: 1rem;
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-family: sans-serif;
+}
+
+.mvpb-block-title {
+    margin-bottom: 0.75rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.mvpb-post-list {
+    margin: 0;
+    padding-left: 1.25rem;
+    list-style: none;
+}
+
+.mvpb-post-item {
+    margin-bottom: 0.5rem;
+    position: relative;
+    padding-left: 1.2rem;
+}
+
+.mvpb-post-item::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: #555;
+}
