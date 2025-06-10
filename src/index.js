@@ -13,14 +13,14 @@ import {
 } from '@wordpress/components';
 
 registerBlockType('wpecounter/most-viewed-block', {
-	title: __('Most Viewed Posts', 'wpecounter'),
-	description: __('A dynamic block showing the most viewed posts.', 'wpecounter'),
+	title: __('Most Popular', 'wpecounter'),
+	description: __('A dynamic block showing the most popular posts.', 'wpecounter'),
 	icon: 'chart-bar',
 	category: 'wpecounter',
 	attributes: {
 		title: {
 			type: 'string',
-			default: __('Most Viewed Posts', 'wpecounter'),
+			default: __('Most Popular', 'wpecounter'),
 		},
 		postType: {
 			type: 'string',

@@ -1,10 +1,10 @@
 {
   "apiVersion": 2,
   "name": "wpecounter/most-viewed-block",
-  "title": "Most Viewed Posts",
+  "title": "Most Popular",
   "category": "wpecounter",
   "icon": "chart-bar",
-  "description": "A dynamic block showing the most viewed posts.",
+  "description": "A dynamic block showing the most popular posts.",
   "textdomain": "wpecounter",
   "editorScript": "file:./build/index.js",
   "style": "file:./src/style-index.css",
