@@ -5,7 +5,7 @@ Tags: views, count visits, post views, post visits, ajax counter
 Requires at least: 3.1  
 Tested up to: 6.8  
 Requires PHP: 5.6  
-Stable tag: 2.0.4  
+Stable tag: 2.1  
 License: GPLv2  
 
 A lightweight and powerful post views counter. Displays visits in post lists and via shortcode or widget. Ideal for tracking popularity across all post types.
@@ -68,6 +68,12 @@ Yes. Version 2.0+ automatically imports your previous data and settings. You can
 3. Widget showing popular posts by views.
 
 == Changelog ==
+
+= 2.1 – Jun 11, 2025 =
+* Added metabox with count and reset count button
+* Make a block to update the legacy deprecated widget
+* Option to select the column position in any post type list
+* Enhance the count views with the users logged
 
 = 2.0.4 – Jun 4, 2025 =
 * Improved output sanitization and escaping for enhanced security.
