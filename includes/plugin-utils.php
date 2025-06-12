@@ -99,7 +99,7 @@ if (!class_exists('WPeCounterPluginUtils')) {
 				$title = esc_html(get_the_title($post->ID));
 				$url   = esc_url(get_permalink($post->ID));
 				$views = $WPeCounterViews->get_post_views_count($post->ID);
-				$output .= "<li class='mvpb-post-item'>📈 <a href='{$url}'>{$title}</a> ({$views})</li>";
+				$output .= "<li class='mvpb-post-item'><a href='{$url}'>{$title}</a> ({$views})</li>";
 			}
 
 			$output .= '</ul>';
