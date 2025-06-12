@@ -100,9 +100,9 @@ registerBlockType('wpecounter/most-viewed-block', {
 
 				<h3>{attributes.title}</h3>
 				<ul style={{ listStyle: 'disc', paddingLeft: '20px' }}>
-					<li>📈 {__('Post 1 - 1.2K views', 'wpecounter')}</li>
-					<li>📈 {__('Post 2 - 980 views', 'wpecounter')}</li>
-					<li>📈 {__('Post 3 - 860 views', 'wpecounter')}</li>
+					<li>{__('Post 1 1.2K', 'wpecounter')}</li>
+					<li>{__('Post 2 980', 'wpecounter')}</li>
+					<li>{__('Post 3 860', 'wpecounter')}</li>
 				</ul>
 				<small style={{ color: '#888' }}>{__('Dynamic preview not available in editor.', 'wpecounter')}</small>
 			</div>

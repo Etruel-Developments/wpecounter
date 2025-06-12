@@ -52,10 +52,66 @@ if (!class_exists('WPeCounterViews')) {
 
 			/* Admin filters    */
 			add_action('admin_init', array($this, 'admin_init'));
+			add_action('add_meta_boxes', array(__CLASS__, 'add_views_metabox'));
+		}
+
+
+		public static function add_views_metabox(){
+			$options	 = get_option('WPeCounter_Options'); // $WPeCounterSettings->options_key);
+			$cpostypes	 = $options['cpostypes'];
+			$screens = array();
+			$args		 = array('public' => true);
+			$output		 = 'names'; // names or objects
+			$post_types	 = get_post_types($args, $output);
+
+			foreach ($post_types as $post_type) {
+				if (@$cpostypes[$post_type]) {
+					$screens[] = $post_type;
+				}
+			}
+			add_meta_box(
+				'views_metabox',
+				__('WP Post Views', 'wpecounter'),
+				array(__CLASS__, 'render_views_metabox'),
+				$screens,
+				'side',
+				'default'
+			);
 		}
 
 		/**
-		 * Adds support for 'wpecounter' to the 'post', 'page', and 'attachment' post types (default WordPress 
+		 * Renders the views metabox.
+		 *
+		 * @param WP_Post $post The current post object.
+		 */
+		public static function render_views_metabox($post) {
+
+			// Print styles once
+			self::print_reset_views_button_styles();
+
+			// Prepare nonce and button
+			$nonce = wp_create_nonce('wpecounter_reset_views_' . $post->ID);
+			$reset_button = sprintf(
+				'<a href="#" class="wpecounter-reset-views-btn" data-postid="%d" data-nonce="%s" title="%s">%s <span class="dashicons dashicons-update"></span></a>',
+				esc_attr($post->ID),
+				esc_attr($nonce),
+				esc_attr__('Reset Views', 'wpecounter'),
+				esc_attr__('Reset', 'wpecounter')
+			);
+
+			// Get views count
+			$views = self::get_post_views_count($post->ID);
+
+			// Output metabox content
+			printf(
+				'<b id="wpecounter-views-count">%s </b>%s',
+				sprintf(__('Views: %d', 'wpecounter'), $views),
+				$reset_button
+			);
+		}
+
+		/**
+		 * Adds support for 'wpecounter' to the 'post', 'page', and 'attachment' post types (default WordPress
 		 * post types).  For all other post types, the theme should explicitly register support for this feature.
 		 *
 		 * @since  1.0.0
@@ -311,23 +367,11 @@ if (!class_exists('WPeCounterViews')) {
 			if ($column_name === 'post_views') {
 				echo '' . wpecounter_post_views(array('post_id' => $id)) . '';
 			}
-			if ($column_name === 'reset_views') {
-				$nonce = wp_create_nonce('wpecounter_reset_views_' . $id);
-				$this->print_reset_views_button_styles();
-
-				echo '<a href="#" class="wpecounter-reset-views-btn" data-postid="' . esc_attr($id) . '" data-nonce="' . esc_attr($nonce) . '" title="' . esc_attr__('Reset Views', 'wpecounter') . '">
-					<span class="dashicons dashicons-update"></span>
-				</a>';
-			}
 		}
-		public function print_reset_views_button_styles() {
+		public static function print_reset_views_button_styles() {
 			echo '<style>
-				.column-reset_views {
-					text-align: center !important;
-					width: 80px !important;
-					overflow: hidden;
-				}
 				.wpecounter-reset-views-btn {
+					background:rgba(231, 227, 227, 0.88);
 					display: inline-block;
 					cursor: pointer;
 					color: #0073aa;
@@ -337,7 +381,7 @@ if (!class_exists('WPeCounterViews')) {
 					transition: background 0.2s;
 				}
 				.wpecounter-reset-views-btn:hover {
-					background: #f1f1f1;
+					background:rgba(184, 184, 184, 0.88);
 					color: #005177;
 				}
 				.wpecounter-reset-views-btn .dashicons {
@@ -353,10 +397,9 @@ if (!class_exists('WPeCounterViews')) {
 			$cfg = $options;
 
 			$column_post_views = array('post_views' => '' . __('Views', 'wpecounter') . '');
-			$column_reset_views = array('reset_views' => __('Reset Views', 'wpecounter'));
 			$column_pos = (isset($cfg['wpecounter_column_pos']) and $cfg['wpecounter_column_pos'] > 0 ) ? $cfg['wpecounter_column_pos'] : 5;
-			$columns = array_slice($columns, 0, $column_pos, true) + $column_post_views + $column_reset_views + array_slice($columns, $column_pos, NULL, true);
-			$columns = array_merge($columns, $column_post_views, $column_reset_views);
+			$columns = array_slice($columns, 0, $column_pos, true) + $column_post_views + array_slice($columns, $column_pos, NULL, true);
+			$columns = array_merge($columns, $column_post_views);
 			return $columns;
 		}
 
@@ -380,14 +423,13 @@ if (!class_exists('WPeCounterViews')) {
 			add_action('admin_head', array($this, 'post_views_column_width'));
 
 			// Enqueue JS only on post list screens
-			add_action('admin_enqueue_scripts', function($hook) {
-				if ($hook === 'edit.php') {
-					wp_enqueue_script('wpecounter-reset-views', plugins_url('../assets/js/reset-views.js', __FILE__), array('jquery'), null, true);
-					wp_localize_script('wpecounter-reset-views', 'wpecounterResetViews', array(
-						'ajax_url' => admin_url('admin-ajax.php'),
-						'confirm'  => __('Are you sure you want to reset the views for this post?', 'wpecounter'),
-					));
-				}
+			add_action('admin_enqueue_scripts', function ($hook) {
+				wp_enqueue_script('wpecounter-reset-views', plugins_url('../assets/js/reset-views.js', __FILE__), array('jquery'), null, true);
+				wp_localize_script('wpecounter-reset-views', 'wpecounterResetViews', array(
+					'ajax_url' => admin_url('admin-ajax.php'),
+					'confirm'  => __('Are you sure you want to reset the views for this post?', 'wpecounter'),
+					'views_text' => __('Views: ', 'wpecounter'),
+				));
 			});
 			add_action('wp_ajax_wpecounter_reset_views', array($this, 'ajax_reset_views'));
 		}
