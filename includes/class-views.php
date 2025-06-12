@@ -71,7 +71,7 @@ if (!class_exists('WPeCounterViews')) {
 			}
 			add_meta_box(
 				'views_metabox',
-				__('WP Post Views', 'wpecounter'),
+				__('Views Counter', 'wpecounter'),
 				array(__CLASS__, 'render_views_metabox'),
 				$screens,
 				'side',
@@ -92,7 +92,7 @@ if (!class_exists('WPeCounterViews')) {
 			// Prepare nonce and button
 			$nonce = wp_create_nonce('wpecounter_reset_views_' . $post->ID);
 			$reset_button = sprintf(
-				'<a href="#" class="wpecounter-reset-views-btn" data-postid="%d" data-nonce="%s" title="%s">%s <span class="dashicons dashicons-update"></span></a>',
+				'<a href="#" class="wpecounter-reset-views-btn editor-post-publish-button editor-post-publish-button__button button-primary is-compact" data-postid="%d" data-nonce="%s" title="%s">%s</a>',
 				esc_attr($post->ID),
 				esc_attr($nonce),
 				esc_attr__('Reset Views', 'wpecounter'),
@@ -104,8 +104,8 @@ if (!class_exists('WPeCounterViews')) {
 
 			// Output metabox content
 			printf(
-				'<b id="wpecounter-views-count">%s </b>%s',
-				sprintf(__('Views: %d', 'wpecounter'), $views),
+				'<div class="wpecounter-views-box"><label id="wpecounter-views-count" class="wpecounter-views-label">%s </label>%s</div>',
+				sprintf('%d', $views),
 				$reset_button
 			);
 		}
@@ -370,23 +370,25 @@ if (!class_exists('WPeCounterViews')) {
 		}
 		public static function print_reset_views_button_styles() {
 			echo '<style>
-				.wpecounter-reset-views-btn {
-					background:rgba(231, 227, 227, 0.88);
-					display: inline-block;
-					cursor: pointer;
-					color: #0073aa;
-					text-decoration: none;
-					padding: 2px 6px;
-					border-radius: 3px;
-					transition: background 0.2s;
+				.wpecounter-views-box{
+					display: flex;
+					align-items: flex-end;
+					justify-content: center;
+					text-align: center;
 				}
-				.wpecounter-reset-views-btn:hover {
-					background:rgba(184, 184, 184, 0.88);
-					color: #005177;
+				.wpecounter-views-box .button-primary.wpecounter-reset-views-btn {
+					vertical-align: -webkit-baseline-middle; 
+					font-size: 10px; 
+					min-height: 20px; 
+					line-height: 2; 
+					margin-left: 15px;
 				}
-				.wpecounter-reset-views-btn .dashicons {
-					vertical-align: middle;
-					font-size: 18px;
+				.wpecounter-views-label{
+					display: inline-flex;
+					font-size: 60px;
+					font-weight: bold;
+					color: grey;
+					line-height: 45px;
 				}
 			</style>';
 		}
@@ -428,7 +430,6 @@ if (!class_exists('WPeCounterViews')) {
 				wp_localize_script('wpecounter-reset-views', 'wpecounterResetViews', array(
 					'ajax_url' => admin_url('admin-ajax.php'),
 					'confirm'  => __('Are you sure you want to reset the views for this post?', 'wpecounter'),
-					'views_text' => __('Views: ', 'wpecounter'),
 				));
 			});
 			add_action('wp_ajax_wpecounter_reset_views', array($this, 'ajax_reset_views'));
