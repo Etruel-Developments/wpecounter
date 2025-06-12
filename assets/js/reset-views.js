@@ -26,7 +26,7 @@ jQuery(document).ready(function ($) {
                 $btn.removeClass('is-resetting');
                 if (response && response.success) {
                     // Optionally update the views column to 0
-                    $('#wpecounter-views-count').text(wpecounterResetViews.views_text + '0 ');
+                    $('#wpecounter-views-count').text('0');
                     // Show a temporary success message
                     $btn.css('color', 'green');
                     setTimeout(function () {
