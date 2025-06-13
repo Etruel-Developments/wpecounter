@@ -1,57 +1,44 @@
 === WP Views Counter ===
-Contributors: etruel, khaztiel, gerarjos14  
-Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7267TH4PT3GSW  
-Tags: views, count visits, post views, post visits, ajax counter  
-Requires at least: 3.1  
-Tested up to: 6.8  
-Requires PHP: 5.6  
-Stable tag: 2.1  
-License: GPLv2  
+Contributors: etruel, khaztiel, gerarjos14
+Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7267TH4PT3GSW
+Tags: views, count visits, post views, post visits, ajax counter
+Requires at least: 3.1
+Tested up to: 6.8.2
+Requires PHP: 5.6
+Stable tag: 2.1
+License: GPLv2
 
-A lightweight and powerful post views counter. Displays visits in post lists and via shortcode or widget. Ideal for tracking popularity across all post types.
+Track your content’s popularity with a fast, reliable post views counter. Smarter and lighter than other bloated plugins. 
 
 == Description ==
 
-**WP Views Counter** lets you see how many views each post, page or custom post type entry has directly in the WordPress admin list table or with a shortcode.
+== Description ==
 
-Perfect for bloggers, marketers and eCommerce site owners, this plugin is designed for speed and simplicity. Whether you're running a WooCommerce shop, an Easy Digital Downloads store, or a content-heavy blog — you'll benefit from knowing what content your users engage with the most.
+**WP Views Counter** is a lightweight yet powerful plugin to track how many times each post, page, or custom post type is viewed — from inside the WordPress admin or via shortcode or block.
 
-The counter is AJAX-based, making it efficient and non-intrusive, even on high-traffic sites.
+Designed for performance and precision, it's ideal for blogs, WooCommerce stores, or Easy Digital Downloads shops where knowing what content attracts the most attention is critical.
 
-= Why choose WP Views Counter? =
+Unlike bloated analytics solutions, WP Views Counter focuses on just one thing — accurate view tracking — without slowing down your site.
 
-✅ **Fast and lightweight** — built for performance  
-✅ **Seamless integration** with all custom post types  
-✅ **Easy Digital Downloads compatible**  
-✅ **Popular posts widget included**  
-✅ **Counts views via shortcode or in admin columns**  
-✅ **Multilingual ready**
+= Why choose WP Views Counter over other counters? =
 
-Unlike bloated analytics plugins, WP Views Counter focuses only on what matters: showing you the view count where you need it.
+✅ **Accurate post view counts** shown in the admin list, shortcodes, or blocks
+✅ **Metabox in each post** with manual reset option
+✅ **Exclude views by user role** or logged-in users
+✅ **Works with all post types** and EDD
+✅ **Lightweight AJAX-based tracking** — no page reloads
+✅ **Gutenberg block included** to display most viewed content
+✅ **Import views from other plugins**
+✅ **Multilingual and developer-friendly**
 
-Developer-friendly on GitHub: https://github.com/Etruel-Developments/wpecounter/issues  
-We welcome forks, feedback and pull requests.
+Track content performance at a glance and optimize your content strategy with a tool that just works — no tracking scripts, no third-party APIs, and no clutter.
 
-== Features ==
-
-* Display post views in the admin post list columns.
-* Count views on any custom post type.
-* Shortcode `[WPeCounter]` to display views anywhere.
-* AJAX-based counting — no page reloads needed.
-* Order admin lists by view count.
-* Easy Digital Downloads (EDD) integration: track views for Downloads.
-* Legacy widget to show most visited posts or products.
-* Import views from other counters.
-* Fully translatable — multilingual support out of the box.
-
-== Coming Soon ==
-
-* Option to ignore visits from logged-in users or specific roles.
-* Choose display position of Views column per post type.
+Developer-friendly: [GitHub Repository](https://github.com/Etruel-Developments/wpecounter/issues)
+Contributions, forks and feedback welcome.
 
 == Frequently Asked Questions ==
 
-= Can I upgrade from an older version without losing data? =  
+= Can I upgrade from an older version without losing data? =
 Yes. Version 2.0+ automatically imports your previous data and settings. You can also manually import custom view fields. Always make a backup first.
 
 == Installation ==
@@ -70,10 +57,11 @@ Yes. Version 2.0+ automatically imports your previous data and settings. You can
 == Changelog ==
 
 = 2.1 – Jun 11, 2025 =
-* Added metabox with count and reset count button
-* Make a block to update the legacy deprecated widget
-* Option to select the column position in any post type list
-* Enhance the count views with the users logged
+* Added a post metabox showing view count with a "Reset" button per post.
+* Introduced a Gutenberg block to replace the legacy popular posts widget.
+* New option to choose the Views column position in each post type list.
+* Added feature to exclude logged-in users (or by role) from the view count.
+* New tools to reset all view counters or by post type.
 
 = 2.0.4 – Jun 4, 2025 =
 * Improved output sanitization and escaping for enhanced security.
@@ -126,5 +114,5 @@ Yes. Version 2.0+ automatically imports your previous data and settings. You can
 Initial Release.
 
 == Upgrade Notice ==
-= 2.0.4 =
-Recommended security and stability update. Compatible with WordPress 6.8.
+= 2.1 =
+Major Update. New block. Compatible with WordPress 6.8.2

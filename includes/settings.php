@@ -21,15 +21,15 @@ if (!class_exists('WPeCounterSettings')) {
 		/** $default_options
 		 * Some settings to use by default
 		 */
-		protected $SettingsPage		 = 'WPeCounter';
-		protected $section			 = 'WPeCounter-settings';
-		protected $options_key		 = 'WPeCounter_Options';
-		protected $heading			 = 'WP Views Counter Options';
-		protected $description		 = 'These options are applied to the selected post-types counters.';
-		protected $default_options	 = array(
-			'cpostypes' => array(
-				'post'	 => 1,
-				'page'	 => 1
+		protected $SettingsPage	   = 'WPeCounter';
+		protected $section		   = 'WPeCounter-settings';
+		protected $options_key	   = 'WPeCounter_Options';
+		protected $heading		   = 'WP Views Counter Options';
+		protected $description	   = 'These options are applied to the selected post-types counters.';
+		protected $default_options = array(
+			'cpostypes'			=> array(
+				'post' => 1,
+				'page' => 1
 			),
 			'views_counter_rol' => array('all_roles'),
 		);
@@ -94,144 +94,147 @@ if (!class_exists('WPeCounterSettings')) {
 			}
 
 			add_settings_section(
-				$this->section, // slug
-				'', // Section title
-				'', // Callback function that echos out any content at the top of the section (between heading and fields).
-				$this->SettingsPage
+					$this->section, // slug
+					'', // Section title
+					'', // Callback function that echos out any content at the top of the section (between heading and fields).
+					$this->SettingsPage
 			);
 
 			add_settings_field(
-				'cpostypes',
-				__('Counter on Post types:', 'wpecounter'),
-				array($this, 'checkboxes_callback'),
-				$this->SettingsPage,
-				$this->section,
-				array(
-					'id'	 => 'cpostypes',
-					'name'	 => 'WPeCounter_Options[cpostypes]',
-					'values' => $options['cpostypes']
-				)
+					'cpostypes',
+					__('Counter on Post types:', 'wpecounter'),
+					array($this, 'checkboxes_callback'),
+					$this->SettingsPage,
+					$this->section,
+					array(
+						'id'	 => 'cpostypes',
+						'name'	 => 'WPeCounter_Options[cpostypes]',
+						'values' => $options['cpostypes']
+					)
+			);
+
+			// Add setting for campaign_in_postslist and column_campaign_pos
+			add_settings_field(
+					'campaign_in_postslist',
+					__('Column position on lists:', 'wpecounter'),
+					function ($args) use ($options) {
+						$wpecounter_column_pos = isset($options['wpecounter_column_pos']) ? intval($options['wpecounter_column_pos']) : 0;
+						?>
+						<p>
+							<span id="wpecounter_column_pos_field" class="insidesec" >
+								<label>
+									<input name="WPeCounter_Options[wpecounter_column_pos]" id="wpecounter_column_pos" class="small-text" min="0" type="number" value="<?php echo esc_attr($wpecounter_column_pos); ?>" />
+								</label>
+							</span>
+							<br>
+							<span class="description"><?php esc_html_e('Position of the Views column in the posts(-type) lists.', 'wpecounter'); ?></span>
+						</p>
+						
+						<?php
+					},
+					$this->SettingsPage,
+					$this->section
 			);
 
 			// Add multi-select for views_counter_rol
 			add_settings_field(
-				'views_counter_rol',
-				__('Roles to do not count views:', 'wpecounter'),
-				function($args) use ($options) {
-					global $wp_roles;
-					if ( ! isset( $wp_roles ) ) {
-						$wp_roles = new WP_Roles();
-					}
-					$roles = $wp_roles->get_names();
-					$current = isset($options['views_counter_rol']) ? (array)$options['views_counter_rol'] : array();
-					$all_roles_checked = in_array('all_roles', $current) && count($current) === 1;
-					echo '<div id="views_counter_rol_list">';
-					echo '<label><input type="checkbox" id="views_counter_rol_all" name="WPeCounter_Options[views_counter_rol][]" value="all_roles"' . ($all_roles_checked ? ' checked' : '') . '> ' . esc_html__('All roles', 'wpecounter') . '</label><br>';
-					foreach ($roles as $role_key => $role_name) {
-						printf(
-							'<label><input type="checkbox" class="views_counter_rol_role" name="WPeCounter_Options[views_counter_rol][]" value="%s"%s> %s</label><br>',
-							esc_attr($role_key),
-							in_array($role_key, $current) ? ' checked' : '',
-							esc_html($role_name)
-						);
-					}
-					echo '</div>';
-				},
-				$this->SettingsPage,
-				$this->section
+					'views_counter_rol',
+					__('Do not count views for:', 'wpecounter'),
+					function ($args) use ($options) {
+						global $wp_roles;
+						if (!isset($wp_roles)) {
+							$wp_roles = new WP_Roles();
+						}
+						$roles			   = $wp_roles->get_names();
+						$current		   = isset($options['views_counter_rol']) ? (array) $options['views_counter_rol'] : array();
+						$all_roles_checked = in_array('all_roles', $current) && count($current) === 1;
+						echo '<div id="views_counter_rol_list">';
+						echo '<label><input type="checkbox" id="views_counter_rol_all" name="WPeCounter_Options[views_counter_rol][]" value="all_roles"' . ($all_roles_checked ? ' checked' : '') . '> ' . esc_html__('All logged in users', 'wpecounter') . '</label><br>';
+						foreach ($roles as $role_key => $role_name) {
+							printf(
+									'<label><input type="checkbox" class="views_counter_rol_role" name="WPeCounter_Options[views_counter_rol][]" value="%s"%s> %s</label><br>',
+									esc_attr($role_key),
+									in_array($role_key, $current) ? ' checked' : '',
+									esc_html($role_name)
+							);
+						}
+						echo '</div>';
+					},
+					$this->SettingsPage,
+					$this->section
 			);
-			// Add setting for campaign_in_postslist and column_campaign_pos
-			add_settings_field(
-				'campaign_in_postslist',
-				__('Show Views column in post(-type) lists', 'wpecounter'),
-				function($args) use ($options) {
-					$wpecounter_column_pos = isset($options['wpecounter_column_pos']) ? intval($options['wpecounter_column_pos']) : 0;
-					$helptip = esc_attr__('Position of the Views column in the posts(-type) lists.', 'wpecounter');
-					?>
-					<p>
-						<span id="wpecounter_column_pos_field" class="insidesec" >
-							<label>
-								<strong><?php _e('Column position in Posts(-types) lists.', 'wpecounter'); ?></strong>
-								<input name="WPeCounter_Options[wpecounter_column_pos]" id="wpecounter_column_pos" class="small-text" min="0" type="number" value="<?php echo esc_attr($wpecounter_column_pos); ?>" />
-							</label>
-							<span class="dashicons dashicons-warning help_tip" title="<?php echo $helptip; ?>"></span>
-						</span>
-					</p>
-					<?php
-				},
-				$this->SettingsPage,
-				$this->section
-			);
-
-			add_settings_field(
+/*			add_settings_field(
 				'reset_counters',
 				__('Reset Counters', 'wpecounter'),
 				function($args) use ($options) {
 					// Get all public post types
 					$post_types = get_post_types(['public' => true], 'objects');
-					?>
-					<div>
-						<label>
-							<input type="radio" name="WPeCounter_Options[reset_scope]" value="all" checked>
-							<?php _e('Reset all counters (all post types)', 'wpecounter'); ?>
-						</label>
-						<br>
-						<label>
-							<input type="radio" name="WPeCounter_Options[reset_scope]" value="by_type">
-							<?php _e('Reset by post type:', 'wpecounter'); ?>
-						</label>
-						<select name="WPeCounter_Options[reset_post_type]" style="margin-left:10px;">
-							<?php foreach ($post_types as $post_type) :
+					
+			?>
+			<div>
+				<label>
+					<input type="radio" name="WPeCounter_Options[reset_scope]" value="all" checked>
+					<?php _e('Reset all counters (all post types)', 'wpecounter'); ?>
+				</label>
+				<br>
+				<label>
+					<input type="radio" name="WPeCounter_Options[reset_scope]" value="by_type">
+					<?php _e('Reset by post type:', 'wpecounter'); ?>
+				</label>
+				<select name="WPeCounter_Options[reset_post_type]" style="margin-left:10px;">
+					<?php
+					foreach ($post_types as $post_type) :
 								if ($post_type->name == 'attachment')
 									continue;
-								?>
-								<option value="<?php echo esc_attr($post_type->name); ?>"><?php echo esc_html($post_type->labels->singular_name); ?></option>
-							<?php endforeach; ?>
-						</select>
-						<br><br>
-						<button type="submit" name="reset_counters_btn" class="button button-secondary" onclick="return confirm('<?php echo esc_js(__('Are you sure you want to reset the counters? This cannot be undone.', 'wpecounter')); ?>');">
-							<?php _e('Reset Counters', 'wpecounter'); ?>
-						</button>
-						<p class="description"><?php _e('This will set all selected counters to zero. This action cannot be undone.', 'wpecounter'); ?></p>
-					</div>
-					<?php
+								
+						?>
+						<option value="<?php echo esc_attr($post_type->name); ?>"><?php echo esc_html($post_type->labels->singular_name); ?></option>
+						<?php endforeach; ?>
+				</select>
+				<br><br>
+				<button type="submit" name="reset_counters_btn" class="button button-secondary" onclick="return confirm('//<?php echo esc_js(__('Are you sure you want to reset the counters? This cannot be undone.', 'wpecounter')); ?>');">
+					<?php _e('Reset Counters', 'wpecounter'); ?>
+				</button>
+				<p class="description">//<?php _e('This will set all selected counters to zero. This action cannot be undone.', 'wpecounter'); ?></p>
+			</div>
+			<?php
 				},
 				$this->SettingsPage,
 				$this->section
 			);
-
+*/
 			// Handle reset counters action
 			if (isset($_POST['reset_counters_btn'])) {
 				global $wpdb;
 				if (!isset($WPeCounterViews)) {
 					$WPeCounterViews = new WPeCounterViews();
 				}
-				$meta_key = $WPeCounterViews->wpecounter_views_meta_key();
-				$scope = isset($_POST['WPeCounter_Options']['reset_scope']) ? $_POST['WPeCounter_Options']['reset_scope'] : 'all';
+				$meta_key	 = $WPeCounterViews->wpecounter_views_meta_key();
+				$scope		 = isset($_POST['WPeCounter_Options']['reset_scope']) ? $_POST['WPeCounter_Options']['reset_scope'] : 'all';
 				$reset_count = 0;
 				if ($scope === 'all') {
 					// Reset all counters for all public post types
 					$reset_count = $wpdb->query(
-						$wpdb->prepare(
-							"UPDATE $wpdb->postmeta pm
+							$wpdb->prepare(
+									"UPDATE $wpdb->postmeta pm
 							INNER JOIN $wpdb->posts p ON pm.post_id = p.ID
 							SET pm.meta_value = '0'
 							WHERE pm.meta_key = %s AND p.post_type != %s",
-							$meta_key,
-							'attachment'
-						)
+									$meta_key,
+									'attachment'
+							)
 					);
 				} elseif ($scope === 'by_type' && !empty($_POST['WPeCounter_Options']['reset_post_type'])) {
-					$post_type = sanitize_text_field($_POST['WPeCounter_Options']['reset_post_type']);
+					$post_type	 = sanitize_text_field($_POST['WPeCounter_Options']['reset_post_type']);
 					$reset_count = $wpdb->query(
-						$wpdb->prepare(
-							"UPDATE $wpdb->postmeta pm
+							$wpdb->prepare(
+									"UPDATE $wpdb->postmeta pm
 							INNER JOIN $wpdb->posts p ON pm.post_id = p.ID
 							SET pm.meta_value = '0'
 							WHERE pm.meta_key = %s AND p.post_type = %s",
-							$meta_key,
-							$post_type
-						)
+									$meta_key,
+									$post_type
+							)
 					);
 				}
 				if ($reset_count !== false) {
@@ -242,9 +245,9 @@ if (!class_exists('WPeCounterSettings')) {
 			}
 
 			register_setting(
-				$this->options_key,
-				$this->options_key,
-				array($this, 'sanitize_options')
+					$this->options_key,
+					$this->options_key,
+					array($this, 'sanitize_options')
 			);
 		}
 
@@ -268,16 +271,18 @@ if (!class_exists('WPeCounterSettings')) {
 				</h2>
 				<br />
 				<div>
-					<?php // echo $desc;   ?>
+					<?php // echo $desc;    ?>
 				</div>
 
-				<?php //echo settings_errors($this->SettingsPage); ?>
+				<?php //echo settings_errors($this->SettingsPage);  ?>
 
 				<div id="tab_container">
 					<form method="post" action="options.php">
 						<div id="normal-sortables" class="meta-box-sortables ui-sortable">
 							<div class="postbox inside">						
 								<div class="inside">
+									<h3><span class="dashicons dashicons-welcome-view-site"></span><?php _e('General Options', 'wpecounter'); ?></h3>
+									<hr />
 									<table class="form-table">
 										<?php
 										settings_fields($this->options_key);
@@ -293,10 +298,46 @@ if (!class_exists('WPeCounterSettings')) {
 							<div class="postbox inside">
 								<div class="inside">
 									<h3><span class="dashicons dashicons-sos"></span><?php _e('Danger Area', 'wpecounter'); ?></h3>
+									<hr />
+									<?php
+									// Get all public post types
+									$post_types = get_post_types(['public' => true], 'objects');
+									?>
+									<div><p>
+										<label>
+											<input type="radio" name="WPeCounter_Options[reset_scope]" value="by_type" checked>
+											<?php _e('Reset by post type:', 'wpecounter'); ?>
+										</label>
+										<select name="WPeCounter_Options[reset_post_type]" style="margin-left:10px;">
+											<?php
+											foreach ($post_types as $post_type) :
+												if ($post_type->name == 'attachment')
+													continue;
+												?>
+												<option value="<?php echo esc_attr($post_type->name); ?>"><?php echo esc_html($post_type->labels->singular_name); ?></option>
+											<?php endforeach; ?>
+										</select>
+										<br>
+										<label>
+											<input type="radio" name="WPeCounter_Options[reset_scope]" value="all">
+											<?php _e('Reset all counters (all post types)', 'wpecounter'); ?>
+										</label>
+										</p><p>
+										<button type="submit" name="reset_counters_btn" class="button button-secondary" onclick="return confirm('<?php echo esc_js(__('Are you sure you want to reset the counters? This cannot be undone.', 'wpecounter')); ?>');">
+											<?php _e('Reset Counters', 'wpecounter'); ?>
+										</button>
+										</p>
+										<p class="description"><?php _e('This will set all selected counters to zero. This action cannot be undone.', 'wpecounter'); ?></p>
+										
+									</div>
+									<hr />
+									<p>
 									<strong><?php _e('Be careful with these options. There are not undo. Be sure to make backup of postmeta table.', 'wpecounter'); ?></strong>
+									</p>
 									<p><label>
-											<input type="checkbox" class="checkbox" name="showimpo" value="1" onclick="jQuery('#metaimpo').toggle();" /> 
-											<?php _e('Show Options.', 'wpecounter'); ?></label>
+									<input type = "checkbox" class = "checkbox" name = "showimpo" value = "1" onclick = "jQuery('#metaimpo').toggle();" />
+									<?php _e('Show more options below:', 'wpecounter');
+									?></label>
 									</p>
 									<div id="metaimpo" style="display:none;">
 										<div>
@@ -366,11 +407,11 @@ if (!class_exists('WPeCounterSettings')) {
 		 */
 		public static function checkboxes_callback($data, $echo = true) {
 			// Currently selected post types
-			$cpostypes	 = $data['values'];
+			$cpostypes	= $data['values'];
 			unset($cpostypes['attachment']);  // Do not allow Views counter for attachments 
 			// only publics as privates doesn't have visits
-			$args		 = array('public' => true);
-			$post_types	 = get_post_types($args, 'names'); // names or objects
+			$args		= array('public' => true);
+			$post_types = get_post_types($args, 'names'); // names or objects
 
 			foreach ($post_types as $post_type) {
 				if ($post_type == 'attachment')
@@ -415,12 +456,12 @@ if (!class_exists('WPeCounterSettings')) {
 			$html = '<select id="wpedpc_settings[' . $args['id'] . ']" name="wpedpc_settings[' . $args['id'] . ']" ' . $chosen . 'data-placeholder="' . $placeholder . '" />';
 
 			foreach ($args['options'] as $option => $name) {
-				$selected	 = selected($option, $value, false);
-				$html		 .= '<option value="' . $option . '" ' . $selected . '>' . $name . '</option>';
+				$selected = selected($option, $value, false);
+				$html	  .= '<option value="' . $option . '" ' . $selected . '>' . $name . '</option>';
 			}
 
-			$html	 .= '</select>';
-			$html	 .= '<label for="wpedpc_settings[' . $args['id'] . ']"> ' . $args['desc'] . '</label>';
+			$html .= '</select>';
+			$html .= '<label for="wpedpc_settings[' . $args['id'] . ']"> ' . $args['desc'] . '</label>';
 
 			if ($echo) {
 				echo $html;
@@ -447,7 +488,7 @@ if (!class_exists('WPeCounterSettings')) {
 
 			// Loop through the input and sanitize each of the values
 			foreach ($input as $key => $val) {
-				$new_input[$key] = (!is_array($val) ) ? sanitize_text_field($val) : $val;
+				$new_input[$key] = (!is_array($val)) ? sanitize_text_field($val) : $val;
 			}
 
 			/**
@@ -484,7 +525,7 @@ if (!class_exists('WPeCounterSettings')) {
 						",
 									$WPeCounterViews->wpecounter_views_meta_key(),
 									$impoviews
-					));
+							));
 					// Prepare updated messages 
 					if ($introws > 0) {
 						$impomessage = __('Import success. Posts updated: ', 'wpecounter') . $introws;
@@ -548,8 +589,8 @@ if (!class_exists('WPeCounterSettings')) {
 					$metafield = $WPeCounterViews->wpecounter_views_meta_key();
 
 					// Currently selected post types
-					$cpostypes	 = $new_input['cpostypes'];
-					$sPostTypes	 = "'" . implode("', '", array_keys($cpostypes)) . "'";
+					$cpostypes	= $new_input['cpostypes'];
+					$sPostTypes = "'" . implode("', '", array_keys($cpostypes)) . "'";
 
 					$query = "SELECT
 								ID,
@@ -570,19 +611,18 @@ if (!class_exists('WPeCounterSettings')) {
 
 					$results = $wpdb->get_results($query);
 
-					$insertQuery = "INSERT INTO $wpdb->postmeta (post_id,meta_key,meta_value) VALUES ";
-					$insertQueryValues	 = array();
+					$insertQuery	   = "INSERT INTO $wpdb->postmeta (post_id,meta_key,meta_value) VALUES ";
+					$insertQueryValues = array();
 					foreach ($results as $value) {
 						$array = (array) $value;
 						unset($array['post_type']);
 						array_push($insertQueryValues, "(" . "'" . implode("', '", array_values($array)) . "'" . ")");
 					}
 					$insertValues = implode(",", $insertQueryValues);
-					$insertQuery .= $insertValues;
-					
+					$insertQuery  .= $insertValues;
+
 					$metafixed = $wpdb->query($insertQuery);
 //					var_dump($wpdb->last_query);
-
 //					$metafixed = $wpdb->query("
 //						INSERT INTO `$wpdb->postmeta` (`post_id`,`meta_key`,`meta_value`) 
 //						VALUES(
@@ -637,7 +677,6 @@ if (!class_exists('WPeCounterSettings')) {
 
 			return self::$instance;
 		}
-
 	}
 
 }
