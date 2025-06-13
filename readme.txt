@@ -1,40 +1,39 @@
 === WP Views Counter ===
 Contributors: etruel, khaztiel, gerarjos14
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7267TH4PT3GSW
-Tags: views, count visits, post views, post visits, ajax counter
+Tags: post views, views counter, popular posts, ajax counter, analytics
 Requires at least: 3.1
 Tested up to: 6.8.2
 Requires PHP: 5.6
 Stable tag: 2.1
 License: GPLv2
 
-Track your content’s popularity with a fast, reliable post views counter. Smarter and lighter than other bloated plugins. 
+Fast, lightweight post views counter. Display views in admin, blocks or shortcodes — no tracking scripts required.
 
 == Description ==
 
-== Description ==
+**WP Views Counter** is a lightweight, high-performance plugin that accurately tracks and displays post, page, and custom post type views — directly in the WordPress admin, via shortcode, or with a Gutenberg block.
 
-**WP Views Counter** is a lightweight yet powerful plugin to track how many times each post, page, or custom post type is viewed — from inside the WordPress admin or via shortcode or block.
+Built for bloggers, marketers, store owners, and developers, it works seamlessly across all post types — including WooCommerce and Easy Digital Downloads — with minimal impact on your site’s speed. No external scripts. No unnecessary bloat.
 
-Designed for performance and precision, it's ideal for blogs, WooCommerce stores, or Easy Digital Downloads shops where knowing what content attracts the most attention is critical.
+This plugin does one job and does it exceptionally well: it tells you which content is getting the most attention.
 
-Unlike bloated analytics solutions, WP Views Counter focuses on just one thing — accurate view tracking — without slowing down your site.
+= Key Benefits =
 
-= Why choose WP Views Counter over other counters? =
-
-✅ **Accurate post view counts** shown in the admin list, shortcodes, or blocks
-✅ **Metabox in each post** with manual reset option
-✅ **Exclude views by user role** or logged-in users
-✅ **Works with all post types** and EDD
-✅ **Lightweight AJAX-based tracking** — no page reloads
-✅ **Gutenberg block included** to display most viewed content
+✅ **Accurate view counts** in admin columns, shortcode, or block  
+✅ **Metabox per post** with real-time views and reset button  
+✅ **Exclude views from logged-in users or specific roles**  
+✅ **Fully AJAX-powered** — no page reloads or slowdowns  
+✅ **Works with all post types**, including EDD and WooCommerce  
+✅ **Block to display popular posts** — no legacy widgets required  
+✅ **Developer-friendly and fully translatable**
 ✅ **Import views from other plugins**
-✅ **Multilingual and developer-friendly**
 
-Track content performance at a glance and optimize your content strategy with a tool that just works — no tracking scripts, no third-party APIs, and no clutter.
+Whether you're optimizing your content strategy or simply want to know what's working, **WP Views Counter** is the simple and effective alternative to bloated analytics plugins.
 
-Developer-friendly: [GitHub Repository](https://github.com/Etruel-Developments/wpecounter/issues)
-Contributions, forks and feedback welcome.
+📦 Start tracking your most popular content today — with clarity, speed and control.
+
+💡 Developer-friendly: [Contribute on GitHub](https://github.com/Etruel-Developments/wpecounter/issues) — forks and pull requests welcome.
 
 == Frequently Asked Questions ==
 
@@ -56,8 +55,8 @@ Yes. Version 2.0+ automatically imports your previous data and settings. You can
 
 == Changelog ==
 
-= 2.1 – Jun 11, 2025 =
-* Added a post metabox showing view count with a "Reset" button per post.
+= 2.1 – Jun 13, 2025 =
+* Added a post metabox showing view count with a "Reset" button per post.(Deprecated Legacy Widget will be deleted on future release.)
 * Introduced a Gutenberg block to replace the legacy popular posts widget.
 * New option to choose the Views column position in each post type list.
 * Added feature to exclude logged-in users (or by role) from the view count.
@@ -115,4 +114,4 @@ Initial Release.
 
 == Upgrade Notice ==
 = 2.1 =
-Major Update. New block. Compatible with WordPress 6.8.2
+Major update: Adds Gutenberg block, per-post view metabox with reset, role-based view filtering, and tools to reset counters. Fully compatible with WP 6.8.2.
