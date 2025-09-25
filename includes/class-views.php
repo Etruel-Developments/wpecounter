@@ -415,7 +415,7 @@ if (!class_exists('WPeCounterViews')) {
 			$output		 = 'names'; // names or objects
 			$post_types	 = get_post_types($args, $output);
 			foreach ($post_types as $post_type) {
-				if (@$cpostypes[$post_type]) {
+				if (isset($cpostypes[$post_type]) && $cpostypes[$post_type]) {
 					add_filter('manage_edit-' . $post_type . '_columns', array($this, 'posts_columns_id'), 10);
 					add_action('manage_' . $post_type . '_posts_custom_column', array($this, 'posts_custom_id_columns'), 10, 2);
 					add_filter('manage_edit-' . $post_type . '_sortable_columns', array($this, 'views_column_register_sortable'));
