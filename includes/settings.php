@@ -483,6 +483,10 @@ if (!class_exists('WPeCounterSettings')) {
 		 */
 		public function sanitize_options($input) {
 			global $wpdb;
+
+			if(current_user_can('manage_options')===false){
+				return $input;
+			}
 			// Initialize the new array that will hold the sanitize values
 			$new_input = array();
 
