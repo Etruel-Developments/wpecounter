@@ -5,7 +5,7 @@ Tags: post views, views counter, popular posts, ajax counter, analytics
 Requires at least: 3.1
 Tested up to: 6.8.2
 Requires PHP: 5.6
-Stable tag: 2.1
+Stable tag: 2.1.1
 License: GPLv2
 
 Fast, lightweight post views counter. Display views in admin, blocks or shortcodes — no tracking scripts required.
@@ -54,6 +54,9 @@ Yes. Version 2.0+ automatically imports your previous data and settings. You can
 3. Widget showing popular posts by views.
 
 == Changelog ==
+
+= 2.1.1 – Sep 25, 2025 =
+* Fixed PHP Warnings displayed in DEBUG mode for Undefined array keys of non-public post-types.
 
 = 2.1 – Jun 13, 2025 =
 * Added a post metabox showing view count with a "Reset" button per post.(Deprecated Legacy Widget will be deleted on future release.)
@@ -113,5 +116,4 @@ Yes. Version 2.0+ automatically imports your previous data and settings. You can
 Initial Release.
 
 == Upgrade Notice ==
-= 2.1 =
-Major update: Adds Gutenberg block, per-post view metabox with reset, role-based view filtering, and tools to reset counters. Fully compatible with WP 6.8.2.
+Fully compatible with WP 6.8.2. Fixed PHP Warnings displayed in DEBUG mode
