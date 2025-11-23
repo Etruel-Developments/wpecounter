@@ -437,12 +437,11 @@ if (!class_exists('WPeCounterViews')) {
 
 		// AJAX handler to reset views
 		public function ajax_reset_views() {
-			if (
-				!isset($_POST['post_id'], $_POST['nonce']) ||
-				!wp_verify_nonce($_POST['nonce'], 'wpecounter_reset_views_' . absint($_POST['post_id']))
-			) {
-				wp_send_json_error(array('message' => __('Invalid request.', 'wpecounter')));
+
+			if (!current_user_can('manage_options') || !wp_verify_nonce($_POST['nonce'], 'wpecounter_reset_views_' . absint($_POST['post_id']))) {
+				wp_send_json_error(array('message' => __('Invalid permissions.', 'wpecounter')));
 			}
+
 			$post_id = absint($_POST['post_id']);
 			if ($post_id) {
 				delete_post_meta($post_id, $this->wpecounter_views_meta_key());
