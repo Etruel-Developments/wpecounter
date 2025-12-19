@@ -77,6 +77,10 @@ if (!class_exists('WPeCounterSettings')) {
 		 */
 		public function register_settings() {
 
+			// Security: only admins
+			if ( ! is_admin() || ! current_user_can( 'manage_options' ) ) {
+				return;
+			}
 			// no options - create them.
 			if (false == get_option($this->options_key)) {
 				add_option($this->options_key, $this->default_options);
@@ -204,7 +208,7 @@ if (!class_exists('WPeCounterSettings')) {
 			);
 */
 			// Handle reset counters action
-			if (isset($_POST['reset_counters_btn'])) {
+			if (isset($_POST['reset_counters_btn']) &&	check_admin_referer('wpecounter_reset_counters', 'wpecounter_reset_nonce') ) {	
 				global $wpdb;
 				if (!isset($WPeCounterViews)) {
 					$WPeCounterViews = new WPeCounterViews();
@@ -298,6 +302,7 @@ if (!class_exists('WPeCounterSettings')) {
 							<div class="postbox inside">
 								<div class="inside">
 									<h3><span class="dashicons dashicons-sos"></span><?php _e('Danger Area', 'wpecounter'); ?></h3>
+									<?php wp_nonce_field( 'wpecounter_reset_counters', 'wpecounter_reset_nonce' ); ?>
 									<hr />
 									<?php
 									// Get all public post types

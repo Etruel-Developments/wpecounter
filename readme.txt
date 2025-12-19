@@ -3,9 +3,9 @@ Contributors: etruel, khaztiel, gerarjos14
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7267TH4PT3GSW
 Tags: post views, views counter, popular posts, ajax counter, analytics
 Requires at least: 3.1
-Tested up to: 6.8.2
-Requires PHP: 5.6
-Stable tag: 2.1.2
+Tested up to: 6.9
+Requires PHP: 7.0
+Stable tag: 2.1.3
 License: GPLv2
 
 Fast, lightweight post views counter. Display views in admin, blocks or shortcodes — no tracking scripts required.
@@ -54,6 +54,12 @@ Yes. Version 2.0+ automatically imports your previous data and settings. You can
 3. Widget showing popular posts by views.
 
 == Changelog ==
+
+= 2.1.3 – Dec 19, 2025 =
+* Security: Improved access control and request validation in admin settings.
+* Added proper capability checks to restrict sensitive actions to administrators only.
+* Added nonce verification to protect destructive actions against unauthorized requests.
+* General hardening of admin-side logic.
 
 = 2.1.2 – Nov 19, 2025 =
 * Add security to reset function
@@ -119,4 +125,4 @@ Yes. Version 2.0+ automatically imports your previous data and settings. You can
 Initial Release.
 
 == Upgrade Notice ==
-Fully compatible with WP 6.8.2. Fixed PHP Warnings displayed in DEBUG mode
+Fully compatible with WP 6.9 and Security Fixes!
